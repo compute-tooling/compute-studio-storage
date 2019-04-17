@@ -58,26 +58,17 @@ def test_s3like():
             {
                 "media_type": "bokeh",
                 "title": "bokeh plot",
-                "data": {
-                    "html": "<div/>",
-                    "javascript": "console.log('hello world')",
-                },
+                "data": {"html": "<div/>", "javascript": "console.log('hello world')"},
             },
             {
                 "media_type": "table",
                 "title": "table stuff",
-                "data": {
-                    "html": "<table/>",
-                },
+                "data": {"html": "<table/>"},
             },
         ],
         "downloadable": [
-            {
-                "media_type": "CSV",
-                "title": "csv file",
-                "data": "comma,sep,values\n"
-            },
-        ]
+            {"media_type": "CSV", "title": "csv file", "data": "comma,sep,values\n"}
+        ],
     }
     task_id = uuid.uuid4()
     rem_res = s3like.write_to_s3like(task_id, exp_loc_res)

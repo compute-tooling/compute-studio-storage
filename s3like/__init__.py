@@ -31,6 +31,7 @@ class Serializer:
     def deserialize(self, data):
         return data
 
+
 class JSONSerializer(Serializer):
     def serialize(self, data):
         return json.dumps(data).encode()
@@ -60,19 +61,25 @@ def get_serializer(media_type):
 
 class Output:
     """Output mixin shared among LocalOutput and RemoteOutput"""
+
     title = fields.Str()
-    media_type = fields.Str(validate=validate.OneOf(choices=["bokeh", "table", "CSV", "png", "jpeg"]))
+    media_type = fields.Str(
+        validate=validate.OneOf(choices=["bokeh", "table", "CSV", "png", "jpeg"])
+    )
 
 
 class RemoteOutput(Output, Schema):
     filename = fields.Str()
 
+
 class RemoteOutputCategory(Schema):
     outputs = fields.Nested(RemoteOutput, many=True)
     ziplocation = fields.Str()
 
+
 class RemoteResult(Schema):
     """Serializer for load_from_S3like"""
+
     renderable = fields.Nested(RemoteOutputCategory)
     downloadable = fields.Nested(RemoteOutputCategory)
 
@@ -81,10 +88,13 @@ class LocalOutput(Output, Schema):
     # Data could be a string or dict. It depends on the media type.
     data = fields.Field()
 
+
 class LocalResult(Schema):
     """Serializer for load_to_S3like"""
+
     renderable = fields.Nested(LocalOutput, many=True)
     downloadable = fields.Nested(LocalOutput, many=True)
+
 
 def write_to_s3like(task_id, loc_result):
     LocalResult().load(loc_result)
@@ -146,12 +156,12 @@ def read_from_s3like(rem_result):
 
         for rem_output in rem_result[category]["outputs"]:
             ser = get_serializer(rem_output["media_type"])
-            rem_data = ser.deserialize(
-                zipfileobj.read(rem_output["filename"])
+            rem_data = ser.deserialize(zipfileobj.read(rem_output["filename"]))
+            read[category].append(
+                {
+                    "title": rem_output["title"],
+                    "media_type": rem_output["media_type"],
+                    "data": rem_data,
+                }
             )
-            read[category].append({
-                "title": rem_output["title"],
-                "media_type": rem_output["media_type"],
-                "data": rem_data,
-            })
     return read
