@@ -15,7 +15,7 @@ import requests
 from marshmallow import Schema, fields, validate
 
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 
 OBJ_STORAGE_ACCESS = os.environ.get("OBJ_STORAGE_ACCESS", None)
