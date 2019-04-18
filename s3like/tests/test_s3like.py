@@ -47,7 +47,7 @@ def test_serializer():
 
 
 def test_get_serializer():
-    types = ["bokeh", "table", "CSV", "PNG", "JPEG"]
+    types = ["bokeh", "table", "CSV", "PNG", "JPEG", "MP3", "MP4", "HDF5"]
     for t in types:
         assert s3like.get_serializer(t)
 
@@ -65,9 +65,39 @@ def test_s3like():
                 "title": "table stuff",
                 "data": "<table/>",
             },
+            {
+                "media_type": "PNG",
+                "title": "PNG data",
+                "data": b"PNG bytes",
+            },
+            {
+                "media_type": "JPEG",
+                "title": "JPEG data",
+                "data": b"JPEG bytes",
+            },
+            {
+                "media_type": "MP3",
+                "title": "MP3 data",
+                "data": b"MP3 bytes",
+            },
+
+            {
+                "media_type": "MP4",
+                "title": "MP4 data",
+                "data": b"MP4 bytes",
+            },
         ],
         "downloadable": [
-            {"media_type": "CSV", "title": "csv file", "data": "comma,sep,values\n"}
+            {
+                "media_type": "CSV",
+                "title": "CSV file",
+                "data": "comma,sep,values\n"
+            },
+            {
+                "media_type": "HDF5",
+                "title": "HDF5 file",
+                "data": b"serialized numpy arrays and such\n"
+            },
         ],
     }
     task_id = uuid.uuid4()

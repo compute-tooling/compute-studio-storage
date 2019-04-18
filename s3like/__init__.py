@@ -56,10 +56,12 @@ def get_serializer(media_type):
     return {
         "bokeh": JSONSerializer("json"),
         "table": TextSerializer("html"),
-        # TODO: store as csv
         "CSV": TextSerializer("csv"),
         "PNG": Serializer("png"),
         "JPEG": Serializer("jpeg"),
+        "MP3": Serializer("mp3"),
+        "MP4": Serializer("mp4"),
+        "HDF5": Serializer("h5"),
     }[media_type]
 
 
@@ -68,7 +70,7 @@ class Output:
 
     title = fields.Str()
     media_type = fields.Str(
-        validate=validate.OneOf(choices=["bokeh", "table", "CSV", "png", "jpeg"])
+        validate=validate.OneOf(choices=["bokeh", "table", "CSV", "PNG", "JPEG", "MP3", "MP4", "HDF5"])
     )
 
 
