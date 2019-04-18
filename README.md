@@ -1,6 +1,6 @@
 # s3like
 
-A small package that is used by COMP to read and write model results to S3 like object storage systems. This means that this package is compliant with DigitalOcean Spaces and AWS S3, since DO Spaces uses the same API as AWS S3.
+A small package that is used by COMP to read and write model results to S3 like object storage systems. This means that this package is compatible with DigitalOcean Spaces and AWS S3, since DO Spaces uses the same API as AWS S3.
 
 Setup:
 -------------------
