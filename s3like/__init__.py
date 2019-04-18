@@ -58,8 +58,8 @@ def get_serializer(media_type):
         "table": TextSerializer("html"),
         # TODO: store as csv
         "CSV": TextSerializer("csv"),
-        "png": Serializer("png"),
-        "jpeg": Serializer("jpeg"),
+        "PNG": Serializer("png"),
+        "JPEG": Serializer("jpeg"),
     }[media_type]
 
 

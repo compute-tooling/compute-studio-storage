@@ -47,7 +47,7 @@ def test_serializer():
 
 
 def test_get_serializer():
-    types = ["bokeh", "table", "CSV", "png", "jpeg"]
+    types = ["bokeh", "table", "CSV", "PNG", "JPEG"]
     for t in types:
         assert s3like.get_serializer(t)
 
