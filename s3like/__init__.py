@@ -15,7 +15,7 @@ import requests
 from marshmallow import Schema, fields, validate
 
 
-__version__ = "1.0.2"
+__version__ = "1.1.0"
 
 
 OBJ_STORAGE_ACCESS = os.environ.get("OBJ_STORAGE_ACCESS", None)
@@ -55,7 +55,7 @@ class TextSerializer(Serializer):
 def get_serializer(media_type):
     return {
         "bokeh": JSONSerializer("json"),
-        "table": JSONSerializer("json"),
+        "table": TextSerializer("html"),
         # TODO: store as csv
         "CSV": TextSerializer("csv"),
         "png": Serializer("png"),

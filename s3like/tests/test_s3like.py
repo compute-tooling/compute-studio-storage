@@ -63,7 +63,7 @@ def test_s3like():
             {
                 "media_type": "table",
                 "title": "table stuff",
-                "data": {"html": "<table/>"},
+                "data": "<table/>",
             },
         ],
         "downloadable": [
