@@ -3,6 +3,7 @@ import json
 import os
 import uuid
 import zipfile
+import time
 from collections import namedtuple
 
 try:
@@ -100,6 +101,7 @@ class LocalResult(Schema):
 
 
 def write_to_s3like(task_id, loc_result):
+    s = time.time()
     LocalResult().load(loc_result)
     session = boto3.session.Session()
     client = session.client(
@@ -118,7 +120,6 @@ def write_to_s3like(task_id, loc_result):
             serializer = get_serializer(output["media_type"])
             ser = serializer.serialize(output["data"])
             filename = f"{task_id}_{str(uuid.uuid4())}.{serializer.ext}"
-            print(ser, type(ser))
             zipfileobj.writestr(filename, ser)
             # Pictures are loaded directly to the s3 bucket in addition to
             # going into the zip file.
@@ -141,16 +142,18 @@ def write_to_s3like(task_id, loc_result):
         client.upload_fileobj(
             buff, OBJ_STORAGE_BUCKET, ziplocation, ExtraArgs={"ACL": "public-read"}
         )
+    f = time.time()
+    print(f"Write finished in {f-s}s")
     return rem_result
 
 
 def read_from_s3like(rem_result):
+    s = time.time()
     RemoteResult().load(rem_result)
     read = {"renderable": [], "downloadable": []}
     endpoint = OBJ_STORAGE_EDGE.replace("https://", "")
     base_url = f"https://{OBJ_STORAGE_BUCKET}.{endpoint}"
     for category in ["renderable", "downloadable"]:
-        print("trying:", f'{base_url}/{rem_result["renderable"]["ziplocation"]}')
         resp = requests.get(f'{base_url}/{rem_result[category]["ziplocation"]}')
         assert resp.status_code == 200
 
@@ -167,4 +170,6 @@ def read_from_s3like(rem_result):
                     "data": rem_data,
                 }
             )
+    f = time.time()
+    print(f"Read finished in {f-s}s")
     return read
