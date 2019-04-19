@@ -155,7 +155,7 @@ def read_from_s3like(rem_result):
     read = {"renderable": [], "downloadable": []}
     endpoint = OBJ_STORAGE_EDGE.replace("https://", "")
     base_url = f"https://{OBJ_STORAGE_BUCKET}.{endpoint}"
-    for category in ["renderable", "downloadable"]:
+    for category in rem_result:
         resp = requests.get(f'{base_url}/{rem_result[category]["ziplocation"]}')
         assert resp.status_code == 200
 
