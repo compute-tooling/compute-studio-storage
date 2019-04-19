@@ -105,6 +105,9 @@ def test_s3like():
     loc_res = s3like.read_from_s3like(rem_res)
     assert loc_res == exp_loc_res
 
+    loc_res1 = s3like.read_from_s3like({"renderable": rem_res["renderable"]})
+    assert loc_res1["renderable"] == exp_loc_res["renderable"]
+
 
 def test_errors():
     with pytest.raises(exceptions.ValidationError):

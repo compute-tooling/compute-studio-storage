@@ -15,7 +15,7 @@ import requests
 from marshmallow import Schema, fields, validate
 
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 
 
 OBJ_STORAGE_ACCESS = os.environ.get("OBJ_STORAGE_ACCESS", None)
@@ -86,8 +86,8 @@ class RemoteOutputCategory(Schema):
 class RemoteResult(Schema):
     """Serializer for load_from_S3like"""
 
-    renderable = fields.Nested(RemoteOutputCategory)
-    downloadable = fields.Nested(RemoteOutputCategory)
+    renderable = fields.Nested(RemoteOutputCategory, required=False)
+    downloadable = fields.Nested(RemoteOutputCategory, required=False)
 
 
 class LocalOutput(Output, Schema):
