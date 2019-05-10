@@ -15,7 +15,7 @@ import requests
 from marshmallow import Schema, fields, validate
 
 
-__version__ = "1.3.0"
+__version__ = "1.3.1"
 
 
 OBJ_STORAGE_ACCESS = os.environ.get("OBJ_STORAGE_ACCESS", None)
@@ -102,7 +102,7 @@ class LocalResult(Schema):
     downloadable = fields.Nested(LocalOutput, many=True)
 
 
-def write_to_s3like(task_id, loc_result):
+def write_to_s3like(task_id, loc_result, do_upload=True):
     s = time.time()
     LocalResult().load(loc_result)
     session = boto3.session.Session()
@@ -125,7 +125,7 @@ def write_to_s3like(task_id, loc_result):
             zipfileobj.writestr(filename, ser)
             # Pictures are loaded directly to the s3 bucket in addition to
             # going into the zip file.
-            if output["media_type"] in ["jpeg", "png"]:
+            if output["media_type"] in ["jpeg", "png"] and do_upload:
                 client.upload_fileobj(
                     io.BytesIO(ser),
                     OBJ_STORAGE_BUCKET,
@@ -141,9 +141,10 @@ def write_to_s3like(task_id, loc_result):
             )
         zipfileobj.close()
         buff.seek(0)
-        client.upload_fileobj(
-            buff, OBJ_STORAGE_BUCKET, ziplocation, ExtraArgs={"ACL": "public-read"}
-        )
+        if do_upload:
+            client.upload_fileobj(
+                buff, OBJ_STORAGE_BUCKET, ziplocation, ExtraArgs={"ACL": "public-read"}
+            )
     f = time.time()
     print(f"Write finished in {f-s}s")
     return rem_result
