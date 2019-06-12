@@ -121,17 +121,10 @@ def write_to_s3like(task_id, loc_result, do_upload=True):
         for output in loc_result[category]:
             serializer = get_serializer(output["media_type"])
             ser = serializer.serialize(output["data"])
-            filename = f"{task_id}_{str(uuid.uuid4())}.{serializer.ext}"
+            filename = output["title"]
+            if not filename.endswith(f".{serializer.ext}"):
+                filename += f".{serializer.ext}"
             zipfileobj.writestr(filename, ser)
-            # Pictures are loaded directly to the s3 bucket in addition to
-            # going into the zip file.
-            if output["media_type"] in ["jpeg", "png"] and do_upload:
-                client.upload_fileobj(
-                    io.BytesIO(ser),
-                    OBJ_STORAGE_BUCKET,
-                    filename,
-                    ExtraArgs={"ACL": "public-read"},
-                )
             rem_result[category]["outputs"].append(
                 {
                     "title": output["title"],
