@@ -62,6 +62,9 @@ def get_serializer(media_type):
         "MP3": Serializer("mp3"),
         "MP4": Serializer("mp4"),
         "HDF5": Serializer("h5"),
+        "PDF": Serializer("pdf"),
+        "Markdown": TextSerializer("md"),
+        "Text": TextSerializer("txt"),
     }[media_type]
 
 
@@ -70,7 +73,7 @@ class Output:
 
     title = fields.Str()
     media_type = fields.Str(
-        validate=validate.OneOf(choices=["bokeh", "table", "CSV", "PNG", "JPEG", "MP3", "MP4", "HDF5"])
+        validate=validate.OneOf(choices=["bokeh", "table", "CSV", "PNG", "JPEG", "MP3", "MP4", "HDF5", "PDF", "Markdown", "Text"])
     )
 
 

@@ -98,6 +98,21 @@ def test_s3like():
                 "title": "HDF5 file",
                 "data": b"serialized numpy arrays and such\n"
             },
+            {
+                "media_type": "PDF",
+                "title": "PDF file",
+                "data": b"some pdf like data."
+            },
+            {
+                "media_type": "Markdown",
+                "title": "Markdown file",
+                "data": "**hello world**"
+            },
+            {
+                "media_type": "Text",
+                "title": "Text file",
+                "data": "text data"
+            },
         ],
     }
     task_id = uuid.uuid4()
