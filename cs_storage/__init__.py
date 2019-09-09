@@ -6,11 +6,7 @@ import zipfile
 import time
 from collections import namedtuple
 
-try:
-    from fs_gcsfs import GCSFS
-except ImportError:
-    GCSFS = None
-
+import gcsfs
 from marshmallow import Schema, fields, validate
 
 
@@ -101,10 +97,7 @@ class LocalResult(Schema):
 
 
 def write(task_id, loc_result, do_upload=True):
-    if GCSFS is not None:
-        gcsfs = GCSFS(BUCKET)
-    else:
-        gcsfs = None
+    fs = gcsfs.GCSFileSystem()
     s = time.time()
     LocalResult().load(loc_result)
     rem_result = {}
@@ -130,7 +123,7 @@ def write(task_id, loc_result, do_upload=True):
         zipfileobj.close()
         buff.seek(0)
         if do_upload:
-            with gcsfs.open(ziplocation, "wb") as f:
+            with fs.open(f"{BUCKET}/{ziplocation}", "wb") as f:
                 f.write(buff.read())
     f = time.time()
     print(f"Write finished in {f-s}s")
@@ -138,12 +131,13 @@ def write(task_id, loc_result, do_upload=True):
 
 
 def read(rem_result):
-    gcsfs = GCSFS(BUCKET)
+    # compute studio results have public read access.
+    fs = gcsfs.GCSFileSystem(token="anon")
     s = time.time()
     RemoteResult().load(rem_result)
     read = {"renderable": [], "downloadable": []}
     for category in rem_result:
-        with gcsfs.open(rem_result[category]["ziplocation"], "rb") as f:
+        with fs.open(f"{BUCKET}/{rem_result[category]['ziplocation']}", "rb") as f:
             res = f.read()
 
         buff = io.BytesIO(res)

@@ -17,7 +17,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/compute-tooling/compute-studio-storage",
     packages=setuptools.find_packages(),
-    install_requires=["marshmallow>=3.0.0", "fs-gcsfs"],
+    install_requires=["marshmallow>=3.0.0", "gcsfs"],
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",

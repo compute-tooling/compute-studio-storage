@@ -4,4 +4,4 @@ channels:
 dependencies:
   - "marshmallow>=3.0.0"
   - pytest
-  - fs-gcsfs
+  - gcsfs
