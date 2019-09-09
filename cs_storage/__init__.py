@@ -10,7 +10,7 @@ import gcsfs
 from marshmallow import Schema, fields, validate
 
 
-__version__ = "1.5.0"
+__version__ = "1.6.0"
 
 
 BUCKET = os.environ.get("BUCKET", None)
