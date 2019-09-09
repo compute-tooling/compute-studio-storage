@@ -11,7 +11,6 @@ try:
 except ImportError:
     GCSFS = None
 
-import requests
 from marshmallow import Schema, fields, validate
 
 
@@ -83,7 +82,7 @@ class RemoteOutputCategory(Schema):
 
 
 class RemoteResult(Schema):
-    """Serializer for load_from_S3like"""
+    """Serializer for read"""
 
     renderable = fields.Nested(RemoteOutputCategory, required=False)
     downloadable = fields.Nested(RemoteOutputCategory, required=False)
@@ -95,13 +94,13 @@ class LocalOutput(Output, Schema):
 
 
 class LocalResult(Schema):
-    """Serializer for load_to_S3like"""
+    """Serializer for read"""
 
     renderable = fields.Nested(LocalOutput, many=True)
     downloadable = fields.Nested(LocalOutput, many=True)
 
 
-def write_to_s3like(task_id, loc_result, do_upload=True):
+def write(task_id, loc_result, do_upload=True):
     if GCSFS is not None:
         gcsfs = GCSFS(BUCKET)
     else:
@@ -138,7 +137,7 @@ def write_to_s3like(task_id, loc_result, do_upload=True):
     return rem_result
 
 
-def read_from_s3like(rem_result):
+def read(rem_result):
     gcsfs = GCSFS(BUCKET)
     s = time.time()
     RemoteResult().load(rem_result)
