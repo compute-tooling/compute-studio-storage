@@ -7,9 +7,9 @@ import time
 from collections import namedtuple
 
 try:
-    import boto3
+    from fs_gcsfs import GCSFS
 except ImportError:
-    boto3 = None
+    GCSFS = None
 
 import requests
 from marshmallow import Schema, fields, validate
@@ -18,11 +18,7 @@ from marshmallow import Schema, fields, validate
 __version__ = "1.5.0"
 
 
-OBJ_STORAGE_ACCESS = os.environ.get("OBJ_STORAGE_ACCESS", None)
-OBJ_STORAGE_SECRET = os.environ.get("OBJ_STORAGE_SECRET", None)
-OBJ_STORAGE_ENDPOINT = os.environ.get("OBJ_STORAGE_ENDPOINT", None)
-OBJ_STORAGE_EDGE = os.environ.get("OBJ_STORAGE_EDGE", None)
-OBJ_STORAGE_BUCKET = os.environ.get("OBJ_STORAGE_BUCKET", None)
+BUCKET = os.environ.get("BUCKET", None)
 
 
 class Serializer:
@@ -106,15 +102,12 @@ class LocalResult(Schema):
 
 
 def write_to_s3like(task_id, loc_result, do_upload=True):
+    if GCSFS is not None:
+        gcsfs = GCSFS(BUCKET)
+    else:
+        gcsfs = None
     s = time.time()
     LocalResult().load(loc_result)
-    session = boto3.session.Session()
-    client = session.client(
-        "s3",
-        endpoint_url=OBJ_STORAGE_ENDPOINT,
-        aws_access_key_id=OBJ_STORAGE_ACCESS,
-        aws_secret_access_key=OBJ_STORAGE_SECRET,
-    )
     rem_result = {}
     for category in ["renderable", "downloadable"]:
         buff = io.BytesIO()
@@ -138,25 +131,23 @@ def write_to_s3like(task_id, loc_result, do_upload=True):
         zipfileobj.close()
         buff.seek(0)
         if do_upload:
-            client.upload_fileobj(
-                buff, OBJ_STORAGE_BUCKET, ziplocation, ExtraArgs={"ACL": "public-read"}
-            )
+            with gcsfs.open(ziplocation, "wb") as f:
+                f.write(buff.read())
     f = time.time()
     print(f"Write finished in {f-s}s")
     return rem_result
 
 
 def read_from_s3like(rem_result):
+    gcsfs = GCSFS(BUCKET)
     s = time.time()
     RemoteResult().load(rem_result)
     read = {"renderable": [], "downloadable": []}
-    endpoint = OBJ_STORAGE_EDGE.replace("https://", "")
-    base_url = f"https://{OBJ_STORAGE_BUCKET}.{endpoint}"
     for category in rem_result:
-        resp = requests.get(f'{base_url}/{rem_result[category]["ziplocation"]}')
-        assert resp.status_code == 200
+        with gcsfs.open(rem_result[category]["ziplocation"], "rb") as f:
+            res = f.read()
 
-        buff = io.BytesIO(resp.content)
+        buff = io.BytesIO(res)
         zipfileobj = zipfile.ZipFile(buff)
 
         for rem_output in rem_result[category]["outputs"]:

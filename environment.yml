@@ -1,0 +1,8 @@
+name: cs-storage-dev
+channels:
+  - conda-forge
+dependencies:
+  - "marshmallow>=3.0.0"
+  - pytest
+  - requests
+  - fs-gcsfs
