@@ -7,11 +7,11 @@ import pytest
 import requests
 from marshmallow import exceptions
 
-import s3like
+import cs_storage
 
 
 def test_JSONSerializer():
-    ser = s3like.JSONSerializer("json")
+    ser = cs_storage.JSONSerializer("json")
 
     act = ser.serialize({"hello": "world"})
     assert isinstance(act, bytes)
@@ -23,7 +23,7 @@ def test_JSONSerializer():
 
 
 def test_text_serializer():
-    ser = s3like.TextSerializer("txt")
+    ser = cs_storage.TextSerializer("txt")
 
     act = ser.serialize("hello world")
     assert isinstance(act, bytes)
@@ -35,7 +35,7 @@ def test_text_serializer():
 
 
 def test_serializer():
-    ser = s3like.Serializer("txt")
+    ser = cs_storage.Serializer("txt")
 
     act = ser.serialize(b"hello world")
     assert isinstance(act, bytes)
@@ -49,10 +49,10 @@ def test_serializer():
 def test_get_serializer():
     types = ["bokeh", "table", "CSV", "PNG", "JPEG", "MP3", "MP4", "HDF5"]
     for t in types:
-        assert s3like.get_serializer(t)
+        assert cs_storage.get_serializer(t)
 
 
-def test_s3like():
+def test_cs_storage():
     exp_loc_res = {
         "renderable": [
             {
@@ -116,16 +116,16 @@ def test_s3like():
         ],
     }
     task_id = uuid.uuid4()
-    rem_res = s3like.write_to_s3like(task_id, exp_loc_res)
-    loc_res = s3like.read_from_s3like(rem_res)
+    rem_res = cs_storage.write(task_id, exp_loc_res)
+    loc_res = cs_storage.read(rem_res)
     assert loc_res == exp_loc_res
 
-    loc_res1 = s3like.read_from_s3like({"renderable": rem_res["renderable"]})
+    loc_res1 = cs_storage.read({"renderable": rem_res["renderable"]})
     assert loc_res1["renderable"] == exp_loc_res["renderable"]
 
 
 def test_errors():
     with pytest.raises(exceptions.ValidationError):
-        s3like.write_to_s3like("123", {"bad": "data"})
+        cs_storage.write("123", {"bad": "data"})
     with pytest.raises(exceptions.ValidationError):
-        s3like.read_from_s3like({"bad": "data"})
+        cs_storage.read({"bad": "data"})

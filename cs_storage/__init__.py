@@ -6,23 +6,14 @@ import zipfile
 import time
 from collections import namedtuple
 
-try:
-    import boto3
-except ImportError:
-    boto3 = None
-
-import requests
+import gcsfs
 from marshmallow import Schema, fields, validate
 
 
 __version__ = "1.5.0"
 
 
-OBJ_STORAGE_ACCESS = os.environ.get("OBJ_STORAGE_ACCESS", None)
-OBJ_STORAGE_SECRET = os.environ.get("OBJ_STORAGE_SECRET", None)
-OBJ_STORAGE_ENDPOINT = os.environ.get("OBJ_STORAGE_ENDPOINT", None)
-OBJ_STORAGE_EDGE = os.environ.get("OBJ_STORAGE_EDGE", None)
-OBJ_STORAGE_BUCKET = os.environ.get("OBJ_STORAGE_BUCKET", None)
+BUCKET = os.environ.get("BUCKET", None)
 
 
 class Serializer:
@@ -87,7 +78,7 @@ class RemoteOutputCategory(Schema):
 
 
 class RemoteResult(Schema):
-    """Serializer for load_from_S3like"""
+    """Serializer for read"""
 
     renderable = fields.Nested(RemoteOutputCategory, required=False)
     downloadable = fields.Nested(RemoteOutputCategory, required=False)
@@ -99,22 +90,16 @@ class LocalOutput(Output, Schema):
 
 
 class LocalResult(Schema):
-    """Serializer for load_to_S3like"""
+    """Serializer for read"""
 
     renderable = fields.Nested(LocalOutput, many=True)
     downloadable = fields.Nested(LocalOutput, many=True)
 
 
-def write_to_s3like(task_id, loc_result, do_upload=True):
+def write(task_id, loc_result, do_upload=True):
+    fs = gcsfs.GCSFileSystem()
     s = time.time()
     LocalResult().load(loc_result)
-    session = boto3.session.Session()
-    client = session.client(
-        "s3",
-        endpoint_url=OBJ_STORAGE_ENDPOINT,
-        aws_access_key_id=OBJ_STORAGE_ACCESS,
-        aws_secret_access_key=OBJ_STORAGE_SECRET,
-    )
     rem_result = {}
     for category in ["renderable", "downloadable"]:
         buff = io.BytesIO()
@@ -138,25 +123,24 @@ def write_to_s3like(task_id, loc_result, do_upload=True):
         zipfileobj.close()
         buff.seek(0)
         if do_upload:
-            client.upload_fileobj(
-                buff, OBJ_STORAGE_BUCKET, ziplocation, ExtraArgs={"ACL": "public-read"}
-            )
+            with fs.open(f"{BUCKET}/{ziplocation}", "wb") as f:
+                f.write(buff.read())
     f = time.time()
     print(f"Write finished in {f-s}s")
     return rem_result
 
 
-def read_from_s3like(rem_result):
+def read(rem_result):
+    # compute studio results have public read access.
+    fs = gcsfs.GCSFileSystem(token="anon")
     s = time.time()
     RemoteResult().load(rem_result)
     read = {"renderable": [], "downloadable": []}
-    endpoint = OBJ_STORAGE_EDGE.replace("https://", "")
-    base_url = f"https://{OBJ_STORAGE_BUCKET}.{endpoint}"
     for category in rem_result:
-        resp = requests.get(f'{base_url}/{rem_result[category]["ziplocation"]}')
-        assert resp.status_code == 200
+        with fs.open(f"{BUCKET}/{rem_result[category]['ziplocation']}", "rb") as f:
+            res = f.read()
 
-        buff = io.BytesIO(resp.content)
+        buff = io.BytesIO(res)
         zipfileobj = zipfile.ZipFile(buff)
 
         for rem_output in rem_result[category]["outputs"]:

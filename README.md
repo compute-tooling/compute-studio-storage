@@ -1,34 +1,35 @@
-# s3like
+# Compute Studio Storage
 
-A small package that is used by COMP to read and write model results to S3 like object storage systems. This means that this package is compatible with DigitalOcean Spaces and AWS S3, since DO Spaces uses the same API as AWS S3.
+A light-weight package that is used by [Compute Studio](https://compute.studio) to read and write model results to Google Cloud Storage.
 
-Setup:
--------------------
+## Setup
 
 ```bash
-pip install s3like
-export OBJ_STORAGE_ACCESS=...
-export OBJ_STORAGE_SECRET=...
-export OBJ_STORAGE_ENDPOINT=...
-export OBJ_STORAGE_EDGE=...
-export OBJ_STORAGE_BUCKET=...
+pip install cs-storage
+export BUCKET=YOUR_BUCKET
 ```
 
-Use:
-------------
+## Authenticate
+
+```bash
+gcloud auth login
+gcloud auth application-default login
+```
+
+## Use
 
 ```python
-import s3like
+import cs_storage
 
-# run_model returns data that is compliant with the COMP outputs api.
+# run_model returns data that is compliant with the C/S outputs api.
 local_result, task_id = run_model(**kwargs)
-remote_result = s3like.write_to_s3like(task_id, local_result)
-round_trip = s3like.read_from_s3like(remote_result)
+remote_result = cs_storage.write(task_id, local_result)
+round_trip = cs_storage.read(remote_result)
 assert local_result == round_trip
 ```
 
-Test:
--------------
+## Test
+
 ```bash
 py.test -v
 ```
