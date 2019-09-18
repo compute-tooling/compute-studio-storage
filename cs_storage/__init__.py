@@ -10,7 +10,7 @@ import gcsfs
 from marshmallow import Schema, fields, validate
 
 
-from .screenshot import screenshot
+from .screenshot import screenshot, ScreenshotError, SCREENSHOT_ENABLED
 
 __version__ = "1.6.0"
 
@@ -63,10 +63,25 @@ def get_serializer(media_type):
 
 class Output:
     """Output mixin shared among LocalOutput and RemoteOutput"""
+
     id = fields.UUID()
     title = fields.Str()
     media_type = fields.Str(
-        validate=validate.OneOf(choices=["bokeh", "table", "CSV", "PNG", "JPEG", "MP3", "MP4", "HDF5", "PDF", "Markdown", "Text"])
+        validate=validate.OneOf(
+            choices=[
+                "bokeh",
+                "table",
+                "CSV",
+                "PNG",
+                "JPEG",
+                "MP3",
+                "MP4",
+                "HDF5",
+                "PDF",
+                "Markdown",
+                "Text",
+            ]
+        )
     )
 
 
@@ -98,6 +113,18 @@ class LocalResult(Schema):
     downloadable = fields.Nested(LocalOutput, many=True)
 
 
+def write_pic(fs, output):
+    if SCREENSHOT_ENABLED:
+        try:
+            pic_data = screenshot(output)
+        except ScreenshotError:
+            print("failed to create screenshot for ", output["id"])
+            return
+        else:
+            with fs.open(f"{BUCKET}/{output['id']}.png", "wb") as f:
+                f.write(pic_data)
+
+
 def write(task_id, loc_result, do_upload=True):
     fs = gcsfs.GCSFileSystem()
     s = time.time()
@@ -111,18 +138,21 @@ def write(task_id, loc_result, do_upload=True):
         for output in loc_result[category]:
             serializer = get_serializer(output["media_type"])
             ser = serializer.serialize(output["data"])
+            output_id = str(uuid.uuid4())
             filename = output["title"]
             if not filename.endswith(f".{serializer.ext}"):
                 filename += f".{serializer.ext}"
             zipfileobj.writestr(filename, ser)
             rem_result[category]["outputs"].append(
                 {
-                    # "id": uuid.uuid4(),
+                    "id": output_id,
                     "title": output["title"],
                     "media_type": output["media_type"],
                     "filename": filename,
                 }
             )
+            if do_upload and category == "renderable":
+                write_pic(fs, output)
         zipfileobj.close()
         buff.seek(0)
         if do_upload:
@@ -151,7 +181,7 @@ def read(rem_result):
             rem_data = ser.deserialize(zipfileobj.read(rem_output["filename"]))
             read[category].append(
                 {
-                    # "id": rem_output["unique_id"],
+                    "id": rem_output.get("id", None),
                     "title": rem_output["title"],
                     "media_type": rem_output["media_type"],
                     "data": rem_data,
