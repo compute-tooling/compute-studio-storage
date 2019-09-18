@@ -54,7 +54,7 @@ async def _screenshot(template_path, pic_path):
     """
     Use pyppeteer, a python port of puppeteer, to open the
     template at template_path and take a screenshot of the
-    output that is rendered within it. 
+    output that is rendered within it.
 
     The output is rendered within a Bootstrap card element.
     This element is only as big as the elements that it contains.
@@ -62,7 +62,7 @@ async def _screenshot(template_path, pic_path):
     card to figure out which part of the screen we need to use
     for the screenshot!
 
-    Note: pyppetter looks stale. If it continues to not be 
+    Note: pyppetter looks stale. If it continues to not be
     maintained well, then the extremely active, well-maintained
     puppeteer should be used for creating these screenshots. The
     downside of using puppeteer is that it is written in nodejs.
@@ -88,7 +88,7 @@ async def _screenshot(template_path, pic_path):
 
 def screenshot(output):
     """
-    Create screenshot of outputs. The intermediate results are 
+    Create screenshot of outputs. The intermediate results are
     written to temporary files and a picture, represented as a
     stream of bytes, is returned.
     """
