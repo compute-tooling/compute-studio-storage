@@ -5,3 +5,6 @@ dependencies:
   - "marshmallow>=3.0.0"
   - pytest
   - gcsfs
+  - jinja2 # optional
+  - pyppeteer # optional
+  - websockets==6.0

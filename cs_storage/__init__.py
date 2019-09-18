@@ -10,6 +10,8 @@ import gcsfs
 from marshmallow import Schema, fields, validate
 
 
+from .screenshot import screenshot
+
 __version__ = "1.6.0"
 
 
@@ -61,7 +63,7 @@ def get_serializer(media_type):
 
 class Output:
     """Output mixin shared among LocalOutput and RemoteOutput"""
-
+    id = fields.UUID()
     title = fields.Str()
     media_type = fields.Str(
         validate=validate.OneOf(choices=["bokeh", "table", "CSV", "PNG", "JPEG", "MP3", "MP4", "HDF5", "PDF", "Markdown", "Text"])
@@ -115,6 +117,7 @@ def write(task_id, loc_result, do_upload=True):
             zipfileobj.writestr(filename, ser)
             rem_result[category]["outputs"].append(
                 {
+                    # "id": uuid.uuid4(),
                     "title": output["title"],
                     "media_type": output["media_type"],
                     "filename": filename,
@@ -148,6 +151,7 @@ def read(rem_result):
             rem_data = ser.deserialize(zipfileobj.read(rem_output["filename"]))
             read[category].append(
                 {
+                    # "id": rem_output["unique_id"],
                     "title": rem_output["title"],
                     "media_type": rem_output["media_type"],
                     "data": rem_data,

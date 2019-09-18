@@ -1,0 +1,50 @@
+{
+    "outputs": {
+        "renderable": {
+            "outputs": [
+                {
+                    "title": "Basic Liabilities",
+                    "filename": "Basic Liabilities.html",
+                    "media_type": "table"
+                },
+                {
+                    "title": "Tax Liabilities by Wage (Holding Other Inputs Constant)",
+                    "filename": "Tax Liabilities by Wage (Holding Other Inputs Constant).json",
+                    "media_type": "bokeh"
+                },
+                {
+                    "title": "Tax Rates by Wage (Holding Other Inputs Constant)",
+                    "filename": "Tax Rates by Wage (Holding Other Inputs Constant).json",
+                    "media_type": "bokeh"
+                },
+                {
+                    "title": "Tax Credits by Wage (Holding Other Inputs Constant)",
+                    "filename": "Tax Credits by Wage (Holding Other Inputs Constant).json",
+                    "media_type": "bokeh"
+                },
+                {
+                    "title": "Calculation of Liabilities",
+                    "filename": "Calculation of Liabilities.html",
+                    "media_type": "table"
+                }
+            ],
+            "ziplocation": "c497e735-5653-417b-ae45-cbccc8be658f_renderable.zip"
+        },
+        "downloadable": {
+            "outputs": [
+                {
+                    "title": "basic_table",
+                    "filename": "basic_table.csv",
+                    "media_type": "CSV"
+                },
+                {
+                    "title": "calculation_table",
+                    "filename": "calculation_table.csv",
+                    "media_type": "CSV"
+                }
+            ],
+            "ziplocation": "c497e735-5653-417b-ae45-cbccc8be658f_downloadable.zip"
+        }
+    },
+    "version": "v1"
+}
