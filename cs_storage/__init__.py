@@ -115,6 +115,7 @@ class LocalResult(Schema):
 
 def write_pic(fs, output):
     if SCREENSHOT_ENABLED:
+        s = time.time()
         try:
             pic_data = screenshot(output)
         except ScreenshotError:
@@ -123,6 +124,8 @@ def write_pic(fs, output):
         else:
             with fs.open(f"{BUCKET}/{output['id']}.png", "wb") as f:
                 f.write(pic_data)
+            f = time.time()
+            print(f"Pic write finished in {f-s}s")
 
 
 def write(task_id, loc_result, do_upload=True):
