@@ -24,7 +24,7 @@ class Serializer:
     def serialize(self, data):
         return data
 
-    def deserialize(self, data):
+    def deserialize(self, data, json_serializable=True):
         return data
 
 
@@ -32,7 +32,7 @@ class JSONSerializer(Serializer):
     def serialize(self, data):
         return json.dumps(data).encode()
 
-    def deserialize(self, data):
+    def deserialize(self, data, json_serializable=True):
         return json.loads(data.decode())
 
 
@@ -40,13 +40,16 @@ class TextSerializer(Serializer):
     def serialize(self, data):
         return data.encode()
 
-    def deserialize(self, data):
+    def deserialize(self, data, json_serializable=True):
         return data.decode()
 
 
 class Base64Serializer(Serializer):
-    def deserialize(self, data):
-        return base64.b64encode(data).decode("utf-8")
+    def deserialize(self, data, json_serializable=True):
+        if json_serializable:
+            return base64.b64encode(data).decode("utf-8")
+        else:
+            return data
 
     def from_string(self, data):
         return base64.b64decode(data.encode("utf-8"))
@@ -139,7 +142,7 @@ def write(task_id, loc_result, do_upload=True):
     return rem_result
 
 
-def read(rem_result):
+def read(rem_result, json_serializable=True):
     # compute studio results have public read access.
     fs = gcsfs.GCSFileSystem(token="anon")
     s = time.time()
@@ -154,7 +157,7 @@ def read(rem_result):
 
         for rem_output in rem_result[category]["outputs"]:
             ser = get_serializer(rem_output["media_type"])
-            rem_data = ser.deserialize(zipfileobj.read(rem_output["filename"]))
+            rem_data = ser.deserialize(zipfileobj.read(rem_output["filename"]), json_serializable)
             read[category].append(
                 {
                     "title": rem_output["title"],

@@ -106,7 +106,7 @@ def test_get_serializer():
         assert cs_storage.get_serializer(t)
 
 
-def test_cs_storage():
+def test_cs_storage(png, jpg):
     exp_loc_res = {
         "renderable": [
             {
@@ -122,12 +122,12 @@ def test_cs_storage():
             {
                 "media_type": "PNG",
                 "title": "PNG data",
-                "data": b"PNG bytes",
+                "data": png,
             },
             {
                 "media_type": "JPEG",
                 "title": "JPEG data",
-                "data": b"JPEG bytes",
+                "data": jpg,
             },
             {
                 "media_type": "MP3",
@@ -171,11 +171,17 @@ def test_cs_storage():
     }
     task_id = uuid.uuid4()
     rem_res = cs_storage.write(task_id, exp_loc_res)
-    loc_res = cs_storage.read(rem_res)
+    loc_res = cs_storage.read(rem_res, json_serializable=False)
     assert loc_res == exp_loc_res
+    assert json.dumps(
+        cs_storage.read(rem_res, json_serializable=True)
+    )
 
-    loc_res1 = cs_storage.read({"renderable": rem_res["renderable"]})
+    loc_res1 = cs_storage.read({"renderable": rem_res["renderable"]}, json_serializable=False)
     assert loc_res1["renderable"] == exp_loc_res["renderable"]
+    assert json.dumps(
+        cs_storage.read({"renderable": rem_res["renderable"]}, json_serializable=True)
+    )
 
 
 def test_errors():
