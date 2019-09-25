@@ -5,3 +5,5 @@ dependencies:
   - "marshmallow>=3.0.0"
   - pytest
   - gcsfs
+  - matplotlib
+  - numpy

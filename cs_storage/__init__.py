@@ -1,3 +1,4 @@
+import base64
 import io
 import json
 import os
@@ -43,17 +44,25 @@ class TextSerializer(Serializer):
         return data.decode()
 
 
+class Base64Serializer(Serializer):
+    def deserialize(self, data):
+        return base64.b64encode(data).decode("utf-8")
+
+    def from_string(self, data):
+        return base64.b64decode(data.encode("utf-8"))
+
+
 def get_serializer(media_type):
     return {
         "bokeh": JSONSerializer("json"),
         "table": TextSerializer("html"),
         "CSV": TextSerializer("csv"),
-        "PNG": Serializer("png"),
-        "JPEG": Serializer("jpeg"),
-        "MP3": Serializer("mp3"),
-        "MP4": Serializer("mp4"),
-        "HDF5": Serializer("h5"),
-        "PDF": Serializer("pdf"),
+        "PNG": Base64Serializer("png"),
+        "JPEG": Base64Serializer("jpeg"),
+        "MP3": Base64Serializer("mp3"),
+        "MP4": Base64Serializer("mp4"),
+        "HDF5": Base64Serializer("h5"),
+        "PDF": Base64Serializer("pdf"),
         "Markdown": TextSerializer("md"),
         "Text": TextSerializer("txt"),
     }[media_type]
