@@ -1,3 +1,4 @@
+import base64
 import io
 import json
 import uuid
@@ -8,6 +9,44 @@ import requests
 from marshmallow import exceptions
 
 import cs_storage
+
+
+@pytest.fixture
+def png():
+    import matplotlib.pyplot as plt
+    import numpy as np
+    x = np.linspace(0, 2, 100)
+    plt.figure()
+    plt.plot(x, x, label='linear')
+    plt.plot(x, x**2, label='quadratic')
+    plt.plot(x, x**3, label='cubic')
+    plt.xlabel('x label')
+    plt.ylabel('y label')
+    plt.title("Simple Plot")
+    plt.legend()
+    initial_buff = io.BytesIO()
+    plt.savefig(initial_buff, format="png")
+    initial_buff.seek(0)
+    return initial_buff.read()
+
+
+@pytest.fixture
+def jpg():
+    import matplotlib.pyplot as plt
+    import numpy as np
+    x = np.linspace(0, 2, 100)
+    plt.figure()
+    plt.plot(x, x, label='linear')
+    plt.plot(x, x**2, label='quadratic')
+    plt.plot(x, x**3, label='cubic')
+    plt.xlabel('x label')
+    plt.ylabel('y label')
+    plt.title("Simple Plot")
+    plt.legend()
+    initial_buff = io.BytesIO()
+    plt.savefig(initial_buff, format="jpg")
+    initial_buff.seek(0)
+    return initial_buff.read()
 
 
 def test_JSONSerializer():
@@ -46,13 +85,28 @@ def test_serializer():
     assert act == b"hello world"
 
 
+def test_base64serializer(png, jpg):
+    """Test round trip serializtion/deserialization of PNG and JPG"""
+    ser = cs_storage.Base64Serializer("PNG")
+    asbytes = ser.serialize(png)
+    asstr = ser.deserialize(asbytes)
+    assert png == ser.from_string(asstr)
+    assert json.dumps({"pic": asstr})
+
+    ser = cs_storage.Base64Serializer("JPG")
+    asbytes = ser.serialize(jpg)
+    asstr = ser.deserialize(asbytes)
+    assert jpg == ser.from_string(asstr)
+    assert json.dumps({"pic": asstr})
+
+
 def test_get_serializer():
     types = ["bokeh", "table", "CSV", "PNG", "JPEG", "MP3", "MP4", "HDF5"]
     for t in types:
         assert cs_storage.get_serializer(t)
 
 
-def test_cs_storage():
+def test_cs_storage(png, jpg):
     exp_loc_res = {
         "renderable": [
             {
@@ -68,12 +122,12 @@ def test_cs_storage():
             {
                 "media_type": "PNG",
                 "title": "PNG data",
-                "data": b"PNG bytes",
+                "data": png,
             },
             {
                 "media_type": "JPEG",
                 "title": "JPEG data",
-                "data": b"JPEG bytes",
+                "data": jpg,
             },
             {
                 "media_type": "MP3",
@@ -117,11 +171,17 @@ def test_cs_storage():
     }
     task_id = uuid.uuid4()
     rem_res = cs_storage.write(task_id, exp_loc_res)
-    loc_res = cs_storage.read(rem_res)
+    loc_res = cs_storage.read(rem_res, json_serializable=False)
     assert loc_res == exp_loc_res
+    assert json.dumps(
+        cs_storage.read(rem_res, json_serializable=True)
+    )
 
-    loc_res1 = cs_storage.read({"renderable": rem_res["renderable"]})
+    loc_res1 = cs_storage.read({"renderable": rem_res["renderable"]}, json_serializable=False)
     assert loc_res1["renderable"] == exp_loc_res["renderable"]
+    assert json.dumps(
+        cs_storage.read({"renderable": rem_res["renderable"]}, json_serializable=True)
+    )
 
 
 def test_errors():

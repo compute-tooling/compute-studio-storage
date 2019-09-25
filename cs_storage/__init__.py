@@ -1,3 +1,4 @@
+import base64
 import io
 import json
 import os
@@ -17,13 +18,16 @@ BUCKET = os.environ.get("BUCKET", None)
 
 
 class Serializer:
+    """
+    Base class for serializng input data to bytes and back.
+    """
     def __init__(self, ext):
         self.ext = ext
 
     def serialize(self, data):
         return data
 
-    def deserialize(self, data):
+    def deserialize(self, data, json_serializable=True):
         return data
 
 
@@ -31,7 +35,7 @@ class JSONSerializer(Serializer):
     def serialize(self, data):
         return json.dumps(data).encode()
 
-    def deserialize(self, data):
+    def deserialize(self, data, json_serializable=True):
         return json.loads(data.decode())
 
 
@@ -39,8 +43,19 @@ class TextSerializer(Serializer):
     def serialize(self, data):
         return data.encode()
 
-    def deserialize(self, data):
+    def deserialize(self, data, json_serializable=True):
         return data.decode()
+
+
+class Base64Serializer(Serializer):
+    def deserialize(self, data, json_serializable=True):
+        if json_serializable:
+            return base64.b64encode(data).decode("utf-8")
+        else:
+            return data
+
+    def from_string(self, data):
+        return base64.b64decode(data.encode("utf-8"))
 
 
 def get_serializer(media_type):
@@ -48,12 +63,12 @@ def get_serializer(media_type):
         "bokeh": JSONSerializer("json"),
         "table": TextSerializer("html"),
         "CSV": TextSerializer("csv"),
-        "PNG": Serializer("png"),
-        "JPEG": Serializer("jpeg"),
-        "MP3": Serializer("mp3"),
-        "MP4": Serializer("mp4"),
-        "HDF5": Serializer("h5"),
-        "PDF": Serializer("pdf"),
+        "PNG": Base64Serializer("png"),
+        "JPEG": Base64Serializer("jpeg"),
+        "MP3": Base64Serializer("mp3"),
+        "MP4": Base64Serializer("mp4"),
+        "HDF5": Base64Serializer("h5"),
+        "PDF": Base64Serializer("pdf"),
         "Markdown": TextSerializer("md"),
         "Text": TextSerializer("txt"),
     }[media_type]
@@ -130,7 +145,7 @@ def write(task_id, loc_result, do_upload=True):
     return rem_result
 
 
-def read(rem_result):
+def read(rem_result, json_serializable=True):
     # compute studio results have public read access.
     fs = gcsfs.GCSFileSystem(token="anon")
     s = time.time()
@@ -145,7 +160,7 @@ def read(rem_result):
 
         for rem_output in rem_result[category]["outputs"]:
             ser = get_serializer(rem_output["media_type"])
-            rem_data = ser.deserialize(zipfileobj.read(rem_output["filename"]))
+            rem_data = ser.deserialize(zipfileobj.read(rem_output["filename"]), json_serializable)
             read[category].append(
                 {
                     "title": rem_output["title"],
