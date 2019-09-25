@@ -18,6 +18,9 @@ BUCKET = os.environ.get("BUCKET", None)
 
 
 class Serializer:
+    """
+    Base class for serializng input data to bytes and back.
+    """
     def __init__(self, ext):
         self.ext = ext
 
