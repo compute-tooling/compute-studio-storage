@@ -193,3 +193,9 @@ def read(rem_result):
     f = time.time()
     print(f"Read finished in {f-s}s")
     return read
+
+
+def add_screenshot_links(rem_result):
+    for rem_output in rem_result["renderable"]["outputs"]:
+        rem_output["screenshot"] = f"https://storage.cloud.google.com/{BUCKET}/{rem_output['id']}.png"
+    return rem_result

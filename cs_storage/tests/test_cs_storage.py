@@ -102,6 +102,23 @@ def test_cs_storage():
     assert exp_res == loc_res_without_id
 
 
+def test_add_screenshot_links():
+    rem_res = {
+        "renderable": {
+            "outputs": [{"id": "1234"}, {"id": "4567"}]
+        }
+    }
+
+    url = f"https://storage.cloud.google.com/{cs_storage.BUCKET}/"
+    assert cs_storage.add_screenshot_links(rem_res) == {
+        "renderable": {
+            "outputs": [
+                {"id": "1234", "screenshot": url + "1234.png"},
+                {"id": "4567", "screenshot": url + "4567.png"}
+            ]
+        }
+    }
+
 def test_errors():
     with pytest.raises(exceptions.ValidationError):
         cs_storage.write("123", {"bad": "data"})
