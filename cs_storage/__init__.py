@@ -64,7 +64,7 @@ def get_serializer(media_type):
 class Output:
     """Output mixin shared among LocalOutput and RemoteOutput"""
 
-    id = fields.UUID()
+    id = fields.UUID(required=False)
     title = fields.Str()
     media_type = fields.Str(
         validate=validate.OneOf(
@@ -148,14 +148,14 @@ def write(task_id, loc_result, do_upload=True):
         for output in loc_result[category]:
             serializer = get_serializer(output["media_type"])
             ser = serializer.serialize(output["data"])
-            output_id = str(uuid.uuid4())
+            output["id"] = str(uuid.uuid4())
             filename = output["title"]
             if not filename.endswith(f".{serializer.ext}"):
                 filename += f".{serializer.ext}"
             zipfileobj.writestr(filename, ser)
             rem_result[category]["outputs"].append(
                 {
-                    "id": output_id,
+                    "id": output["id"],
                     "title": output["title"],
                     "media_type": output["media_type"],
                     "filename": filename,

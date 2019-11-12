@@ -53,6 +53,7 @@ def test_get_serializer():
 
 
 def test_cs_storage():
+    dummy_uuid = "c7a65ad2-0c2c-45d7-b0f7-d9fd524c49b3"
     exp_loc_res = {
         "renderable": [
             {
@@ -82,42 +83,46 @@ def test_cs_storage():
             {"media_type": "Text", "title": "Text file", "data": "text data"},
         ],
     }
-    task_id = uuid.uuid4()
+    task_id = "1868c4a7-b03c-4fe4-ab45-0aa95c0bfa53"
     rem_res = cs_storage.write(task_id, exp_loc_res)
     loc_res = cs_storage.read(rem_res)
     for output_type in ["renderable", "downloadable"]:
-        exp_res = exp_loc_res[output_type]
         loc_res_without_id = [
             {k: v for k, v in output.items() if k != "id"}
             for output in loc_res[output_type]
         ]
-        assert exp_res == loc_res_without_id
+        exp_res_without_id = [
+            {k: v for k, v in output.items() if k != "id"}
+            for output in exp_loc_res[output_type]
+        ]
+        assert exp_res_without_id == loc_res_without_id
 
     loc_res1 = cs_storage.read({"renderable": rem_res["renderable"]})
-    exp_res = exp_loc_res["renderable"]
     loc_res_without_id = [
         {k: v for k, v in output.items() if k != "id"}
         for output in loc_res1["renderable"]
     ]
-    assert exp_res == loc_res_without_id
+    exp_res_without_id = [
+        {k: v for k, v in output.items() if k != "id"}
+        for output in exp_loc_res["renderable"]
+    ]
+
+    assert exp_res_without_id == loc_res_without_id
 
 
 def test_add_screenshot_links():
-    rem_res = {
-        "renderable": {
-            "outputs": [{"id": "1234"}, {"id": "4567"}]
-        }
-    }
+    rem_res = {"renderable": {"outputs": [{"id": "1234"}, {"id": "4567"}]}}
 
     url = f"https://storage.cloud.google.com/{cs_storage.BUCKET}/"
     assert cs_storage.add_screenshot_links(rem_res) == {
         "renderable": {
             "outputs": [
                 {"id": "1234", "screenshot": url + "1234.png"},
-                {"id": "4567", "screenshot": url + "4567.png"}
+                {"id": "4567", "screenshot": url + "4567.png"},
             ]
         }
     }
+
 
 def test_errors():
     with pytest.raises(exceptions.ValidationError):
