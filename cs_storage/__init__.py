@@ -126,6 +126,13 @@ def write_pic(fs, output):
                 f.write(pic_data)
             f = time.time()
             print(f"Pic write finished in {f-s}s")
+    else:
+        import warnings
+
+        warnings.warn(
+            "Screenshot not enabled. Make sure you have installed "
+            "the optional packages listed in environment.yaml."
+        )
 
 
 def write(task_id, loc_result, do_upload=True):
@@ -197,5 +204,7 @@ def read(rem_result):
 
 def add_screenshot_links(rem_result):
     for rem_output in rem_result["renderable"]["outputs"]:
-        rem_output["screenshot"] = f"https://storage.cloud.google.com/{BUCKET}/{rem_output['id']}.png"
+        rem_output[
+            "screenshot"
+        ] = f"https://storage.cloud.google.com/{BUCKET}/{rem_output['id']}.png"
     return rem_result
