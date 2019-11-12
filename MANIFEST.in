@@ -1,1 +1,1 @@
-include cs_config/templates/index.html
+include cs_storage/templates/index.html
