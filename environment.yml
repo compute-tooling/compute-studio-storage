@@ -7,4 +7,5 @@ dependencies:
   - gcsfs
   - jinja2 # optional
   - pyppeteer # optional
-  - websockets==6.0
+  - bokeh # optional
+  - websockets==6.0 # optional
