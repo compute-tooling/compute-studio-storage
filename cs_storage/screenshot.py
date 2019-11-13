@@ -86,7 +86,7 @@ async def _screenshot(template_path, pic_path):
     await browser.close()
 
 
-def screenshot(output):
+def screenshot(output, debug=False):
     """
     Create screenshot of outputs. The intermediate results are
     written to temporary files and a picture, represented as a
@@ -96,6 +96,9 @@ def screenshot(output):
         return None
     html = write_template(output)
     with tempfile.NamedTemporaryFile(suffix=".html") as temp:
+        if debug:
+            with open(f'{output["title"]}.html', "w") as f:
+                f.write(html)
         temp.write(html.encode("utf-8"))
         temp.seek(0)
         template_path = temp.name
