@@ -30,9 +30,8 @@
       <div id="output" class="card card-body card-inner text-center" style="overflow:auto">
         <h4>{{output.title}}</h4>
         {% if output.media_type == 'bokeh' %}
-        <div style="margin:0 auto;">
-          {{output.data.html|safe}}
-          {{output.data.javascript|safe}}
+        <div style="margin:0 auto;">{{output.id}}
+          <div id="{{output.id}}" data-root-id="" className="bk-root"></div>
         </div>
         {% elif output.media_type == 'table' %}
         <div style="margin:0 auto;">
@@ -51,5 +50,11 @@
     </div>
   </div>
 </body>
+
+{% if output.media_type == "bokeh" %}
+<script>
+  window.Bokeh.embed.embed_item({{ output.data | tojson | safe }}, "{{ output.id }}");
+</script>
+{% endif %}
 
 </html>
