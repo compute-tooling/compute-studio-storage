@@ -113,7 +113,7 @@ def test_cs_storage():
 def test_add_screenshot_links():
     rem_res = {"renderable": {"outputs": [{"id": "1234"}, {"id": "4567"}]}}
 
-    url = f"https://storage.cloud.google.com/{cs_storage.BUCKET}/"
+    url = f"https://storage.googleapis.com/{cs_storage.BUCKET}/"
     assert cs_storage.add_screenshot_links(rem_res) == {
         "renderable": {
             "outputs": [
