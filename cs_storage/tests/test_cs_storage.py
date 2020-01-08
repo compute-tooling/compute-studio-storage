@@ -15,13 +15,14 @@ import cs_storage
 def png():
     import matplotlib.pyplot as plt
     import numpy as np
+
     x = np.linspace(0, 2, 100)
     plt.figure()
-    plt.plot(x, x, label='linear')
-    plt.plot(x, x**2, label='quadratic')
-    plt.plot(x, x**3, label='cubic')
-    plt.xlabel('x label')
-    plt.ylabel('y label')
+    plt.plot(x, x, label="linear")
+    plt.plot(x, x ** 2, label="quadratic")
+    plt.plot(x, x ** 3, label="cubic")
+    plt.xlabel("x label")
+    plt.ylabel("y label")
     plt.title("Simple Plot")
     plt.legend()
     initial_buff = io.BytesIO()
@@ -34,13 +35,14 @@ def png():
 def jpg():
     import matplotlib.pyplot as plt
     import numpy as np
+
     x = np.linspace(0, 2, 100)
     plt.figure()
-    plt.plot(x, x, label='linear')
-    plt.plot(x, x**2, label='quadratic')
-    plt.plot(x, x**3, label='cubic')
-    plt.xlabel('x label')
-    plt.ylabel('y label')
+    plt.plot(x, x, label="linear")
+    plt.plot(x, x ** 2, label="quadratic")
+    plt.plot(x, x ** 3, label="cubic")
+    plt.xlabel("x label")
+    plt.ylabel("y label")
     plt.title("Simple Plot")
     plt.legend()
     initial_buff = io.BytesIO()
@@ -107,6 +109,7 @@ def test_get_serializer():
 
 
 def test_cs_storage(png, jpg):
+    dummy_uuid = "c7a65ad2-0c2c-45d7-b0f7-d9fd524c49b3"
     exp_loc_res = {
         "renderable": [
             {
@@ -114,74 +117,74 @@ def test_cs_storage(png, jpg):
                 "title": "bokeh plot",
                 "data": {"html": "<div/>", "javascript": "console.log('hello world')"},
             },
-            {
-                "media_type": "table",
-                "title": "table stuff",
-                "data": "<table/>",
-            },
-            {
-                "media_type": "PNG",
-                "title": "PNG data",
-                "data": png,
-            },
-            {
-                "media_type": "JPEG",
-                "title": "JPEG data",
-                "data": jpg,
-            },
-            {
-                "media_type": "MP3",
-                "title": "MP3 data",
-                "data": b"MP3 bytes",
-            },
-
-            {
-                "media_type": "MP4",
-                "title": "MP4 data",
-                "data": b"MP4 bytes",
-            },
+            {"media_type": "table", "title": "table stuff", "data": "<table/>"},
+            {"media_type": "PNG", "title": "PNG data", "data": png},
+            {"media_type": "JPEG", "title": "JPEG data", "data": jpg},
+            {"media_type": "MP3", "title": "MP3 data", "data": b"MP3 bytes"},
+            {"media_type": "MP4", "title": "MP4 data", "data": b"MP4 bytes"},
         ],
         "downloadable": [
-            {
-                "media_type": "CSV",
-                "title": "CSV file",
-                "data": "comma,sep,values\n"
-            },
+            {"media_type": "CSV", "title": "CSV file", "data": "comma,sep,values\n"},
             {
                 "media_type": "HDF5",
                 "title": "HDF5 file",
-                "data": b"serialized numpy arrays and such\n"
+                "data": b"serialized numpy arrays and such\n",
             },
-            {
-                "media_type": "PDF",
-                "title": "PDF file",
-                "data": b"some pdf like data."
-            },
+            {"media_type": "PDF", "title": "PDF file", "data": b"some pdf like data."},
             {
                 "media_type": "Markdown",
                 "title": "Markdown file",
-                "data": "**hello world**"
+                "data": "**hello world**",
             },
-            {
-                "media_type": "Text",
-                "title": "Text file",
-                "data": "text data"
-            },
+            {"media_type": "Text", "title": "Text file", "data": "text data"},
         ],
     }
-    task_id = uuid.uuid4()
+    task_id = "1868c4a7-b03c-4fe4-ab45-0aa95c0bfa53"
     rem_res = cs_storage.write(task_id, exp_loc_res)
     loc_res = cs_storage.read(rem_res, json_serializable=False)
-    assert loc_res == exp_loc_res
-    assert json.dumps(
-        cs_storage.read(rem_res, json_serializable=True)
-    )
+    for output_type in ["renderable", "downloadable"]:
+        loc_res_without_id = [
+            {k: v for k, v in output.items() if k != "id"}
+            for output in loc_res[output_type]
+        ]
+        exp_res_without_id = [
+            {k: v for k, v in output.items() if k != "id"}
+            for output in exp_loc_res[output_type]
+        ]
+        assert exp_res_without_id == loc_res_without_id
 
-    loc_res1 = cs_storage.read({"renderable": rem_res["renderable"]}, json_serializable=False)
-    assert loc_res1["renderable"] == exp_loc_res["renderable"]
+    assert json.dumps(cs_storage.read(rem_res, json_serializable=True))
+
+    loc_res1 = cs_storage.read(
+        {"renderable": rem_res["renderable"]}, json_serializable=False
+    )
+    loc_res_without_id = [
+        {k: v for k, v in output.items() if k != "id"}
+        for output in loc_res1["renderable"]
+    ]
+    exp_res_without_id = [
+        {k: v for k, v in output.items() if k != "id"}
+        for output in exp_loc_res["renderable"]
+    ]
+
+    assert exp_res_without_id == loc_res_without_id
     assert json.dumps(
         cs_storage.read({"renderable": rem_res["renderable"]}, json_serializable=True)
     )
+
+
+def test_add_screenshot_links():
+    rem_res = {"renderable": {"outputs": [{"id": "1234"}, {"id": "4567"}]}}
+
+    url = f"https://storage.googleapis.com/{cs_storage.BUCKET}/"
+    assert cs_storage.add_screenshot_links(rem_res) == {
+        "renderable": {
+            "outputs": [
+                {"id": "1234", "screenshot": url + "1234.png"},
+                {"id": "4567", "screenshot": url + "4567.png"},
+            ]
+        }
+    }
 
 
 def test_errors():

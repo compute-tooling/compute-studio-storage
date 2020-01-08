@@ -11,6 +11,8 @@ import gcsfs
 from marshmallow import Schema, fields, validate
 
 
+from .screenshot import screenshot, ScreenshotError, SCREENSHOT_ENABLED
+
 __version__ = "1.7.0"
 
 
@@ -21,6 +23,7 @@ class Serializer:
     """
     Base class for serializng input data to bytes and back.
     """
+
     def __init__(self, ext):
         self.ext = ext
 
@@ -77,9 +80,24 @@ def get_serializer(media_type):
 class Output:
     """Output mixin shared among LocalOutput and RemoteOutput"""
 
+    id = fields.UUID(required=False)
     title = fields.Str()
     media_type = fields.Str(
-        validate=validate.OneOf(choices=["bokeh", "table", "CSV", "PNG", "JPEG", "MP3", "MP4", "HDF5", "PDF", "Markdown", "Text"])
+        validate=validate.OneOf(
+            choices=[
+                "bokeh",
+                "table",
+                "CSV",
+                "PNG",
+                "JPEG",
+                "MP3",
+                "MP4",
+                "HDF5",
+                "PDF",
+                "Markdown",
+                "Text",
+            ]
+        )
     )
 
 
@@ -111,6 +129,28 @@ class LocalResult(Schema):
     downloadable = fields.Nested(LocalOutput, many=True)
 
 
+def write_pic(fs, output):
+    if SCREENSHOT_ENABLED:
+        s = time.time()
+        try:
+            pic_data = screenshot(output)
+        except ScreenshotError:
+            print("failed to create screenshot for ", output["id"])
+            return
+        else:
+            with fs.open(f"{BUCKET}/{output['id']}.png", "wb") as f:
+                f.write(pic_data)
+            f = time.time()
+            print(f"Pic write finished in {f-s}s")
+    else:
+        import warnings
+
+        warnings.warn(
+            "Screenshot not enabled. Make sure you have installed "
+            "the optional packages listed in environment.yaml."
+        )
+
+
 def write(task_id, loc_result, do_upload=True):
     fs = gcsfs.GCSFileSystem()
     s = time.time()
@@ -124,17 +164,21 @@ def write(task_id, loc_result, do_upload=True):
         for output in loc_result[category]:
             serializer = get_serializer(output["media_type"])
             ser = serializer.serialize(output["data"])
+            output["id"] = str(uuid.uuid4())
             filename = output["title"]
             if not filename.endswith(f".{serializer.ext}"):
                 filename += f".{serializer.ext}"
             zipfileobj.writestr(filename, ser)
             rem_result[category]["outputs"].append(
                 {
+                    "id": output["id"],
                     "title": output["title"],
                     "media_type": output["media_type"],
                     "filename": filename,
                 }
             )
+            if do_upload and category == "renderable":
+                write_pic(fs, output)
         zipfileobj.close()
         buff.seek(0)
         if do_upload:
@@ -160,9 +204,12 @@ def read(rem_result, json_serializable=True):
 
         for rem_output in rem_result[category]["outputs"]:
             ser = get_serializer(rem_output["media_type"])
-            rem_data = ser.deserialize(zipfileobj.read(rem_output["filename"]), json_serializable)
+            rem_data = ser.deserialize(
+                zipfileobj.read(rem_output["filename"]), json_serializable
+            )
             read[category].append(
                 {
+                    "id": rem_output.get("id", None),
                     "title": rem_output["title"],
                     "media_type": rem_output["media_type"],
                     "data": rem_data,
@@ -171,3 +218,11 @@ def read(rem_result, json_serializable=True):
     f = time.time()
     print(f"Read finished in {f-s}s")
     return read
+
+
+def add_screenshot_links(rem_result):
+    for rem_output in rem_result["renderable"]["outputs"]:
+        rem_output[
+            "screenshot"
+        ] = f"https://storage.googleapis.com/{BUCKET}/{rem_output['id']}.png"
+    return rem_result

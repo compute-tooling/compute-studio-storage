@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Compute Studio</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src={{bokeh_scripts.cdn_js|safe}}></script>
+  <script type="text/javascript" src={{bokeh_scripts.widget_js|safe}}></script>
+
+</head>
+
+<body>
+  <div class="container mt-4">
+    <div class="col-md-12">
+      <div id="output" class="card card-body card-inner text-center" style="overflow:auto">
+        <h4>{{output.title}}</h4>
+        {% if output.media_type == 'bokeh' %}
+        <div style="margin:0 auto;">{{output.id}}
+          <div id="{{output.id}}" data-root-id="" className="bk-root"></div>
+        </div>
+        {% elif output.media_type == 'table' %}
+        <div style="margin:0 auto;">
+          {{output.data|safe}}
+        </div>
+        {% elif output.media_type == 'PNG' %}
+        <div style="margin:0 auto;">
+          <img src="data:image/png;base64, {{ output.data|safe }}" />
+        </div>
+        {% elif output.media_type == 'JPEG' %}
+        <div style="margin:0 auto;">
+          <img src="data:image/jpeg;base64, {{ output.data|safe }}" />
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</body>
+
+{% if output.media_type == "bokeh" %}
+<script>
+  window.Bokeh.embed.embed_item({{ output.data | tojson | safe }}, "{{ output.id }}");
+</script>
+{% endif %}
+
+</html>
