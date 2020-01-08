@@ -11,7 +11,7 @@ import gcsfs
 from marshmallow import Schema, fields, validate
 
 
-__version__ = "1.7.0"
+__version__ = "1.7.1"
 
 
 BUCKET = os.environ.get("BUCKET", None)
@@ -77,6 +77,7 @@ def get_serializer(media_type):
 class Output:
     """Output mixin shared among LocalOutput and RemoteOutput"""
 
+    id = fields.UUID(required=False)
     title = fields.Str()
     media_type = fields.Str(
         validate=validate.OneOf(choices=["bokeh", "table", "CSV", "PNG", "JPEG", "MP3", "MP4", "HDF5", "PDF", "Markdown", "Text"])
