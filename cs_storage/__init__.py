@@ -13,7 +13,7 @@ from marshmallow import Schema, fields, validate
 
 from .screenshot import screenshot, ScreenshotError, SCREENSHOT_ENABLED
 
-__version__ = "1.7.0"
+__version__ = "1.8.0"
 
 
 BUCKET = os.environ.get("BUCKET", None)
