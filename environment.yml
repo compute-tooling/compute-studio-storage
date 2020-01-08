@@ -9,3 +9,6 @@ dependencies:
   - pyppeteer # optional
   - bokeh # optional
   - websockets # optional
+  - matplotlib
+  - numpy
+  - "pillow<7"

@@ -1,3 +1,4 @@
+import base64
 import io
 import json
 import uuid
@@ -8,6 +9,44 @@ import requests
 from marshmallow import exceptions
 
 import cs_storage
+
+
+@pytest.fixture
+def png():
+    import matplotlib.pyplot as plt
+    import numpy as np
+    x = np.linspace(0, 2, 100)
+    plt.figure()
+    plt.plot(x, x, label='linear')
+    plt.plot(x, x**2, label='quadratic')
+    plt.plot(x, x**3, label='cubic')
+    plt.xlabel('x label')
+    plt.ylabel('y label')
+    plt.title("Simple Plot")
+    plt.legend()
+    initial_buff = io.BytesIO()
+    plt.savefig(initial_buff, format="png")
+    initial_buff.seek(0)
+    return initial_buff.read()
+
+
+@pytest.fixture
+def jpg():
+    import matplotlib.pyplot as plt
+    import numpy as np
+    x = np.linspace(0, 2, 100)
+    plt.figure()
+    plt.plot(x, x, label='linear')
+    plt.plot(x, x**2, label='quadratic')
+    plt.plot(x, x**3, label='cubic')
+    plt.xlabel('x label')
+    plt.ylabel('y label')
+    plt.title("Simple Plot")
+    plt.legend()
+    initial_buff = io.BytesIO()
+    plt.savefig(initial_buff, format="jpg")
+    initial_buff.seek(0)
+    return initial_buff.read()
 
 
 def test_JSONSerializer():
@@ -46,13 +85,28 @@ def test_serializer():
     assert act == b"hello world"
 
 
+def test_base64serializer(png, jpg):
+    """Test round trip serializtion/deserialization of PNG and JPG"""
+    ser = cs_storage.Base64Serializer("PNG")
+    asbytes = ser.serialize(png)
+    asstr = ser.deserialize(asbytes)
+    assert png == ser.from_string(asstr)
+    assert json.dumps({"pic": asstr})
+
+    ser = cs_storage.Base64Serializer("JPG")
+    asbytes = ser.serialize(jpg)
+    asstr = ser.deserialize(asbytes)
+    assert jpg == ser.from_string(asstr)
+    assert json.dumps({"pic": asstr})
+
+
 def test_get_serializer():
     types = ["bokeh", "table", "CSV", "PNG", "JPEG", "MP3", "MP4", "HDF5"]
     for t in types:
         assert cs_storage.get_serializer(t)
 
 
-def test_cs_storage():
+def test_cs_storage(png, jpg):
     dummy_uuid = "c7a65ad2-0c2c-45d7-b0f7-d9fd524c49b3"
     exp_loc_res = {
         "renderable": [
@@ -61,11 +115,32 @@ def test_cs_storage():
                 "title": "bokeh plot",
                 "data": {"html": "<div/>", "javascript": "console.log('hello world')"},
             },
-            {"media_type": "table", "title": "table stuff", "data": "<table/>"},
-            {"media_type": "PNG", "title": "PNG data", "data": b"PNG bytes"},
-            {"media_type": "JPEG", "title": "JPEG data", "data": b"JPEG bytes"},
-            {"media_type": "MP3", "title": "MP3 data", "data": b"MP3 bytes"},
-            {"media_type": "MP4", "title": "MP4 data", "data": b"MP4 bytes"},
+            {
+                "media_type": "table",
+                "title": "table stuff",
+                "data": "<table/>",
+            },
+            {
+                "media_type": "PNG",
+                "title": "PNG data",
+                "data": png,
+            },
+            {
+                "media_type": "JPEG",
+                "title": "JPEG data",
+                "data": jpg,
+            },
+            {
+                "media_type": "MP3",
+                "title": "MP3 data",
+                "data": b"MP3 bytes",
+            },
+
+            {
+                "media_type": "MP4",
+                "title": "MP4 data",
+                "data": b"MP4 bytes",
+            },
         ],
         "downloadable": [
             {"media_type": "CSV", "title": "CSV file", "data": "comma,sep,values\n"},
