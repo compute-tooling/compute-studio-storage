@@ -120,6 +120,7 @@ class RemoteResult(Schema):
 class LocalOutput(Output, Schema):
     # Data could be a string or dict. It depends on the media type.
     data = fields.Field()
+    filename = fields.String(required=False)
 
 
 class LocalResult(Schema):
@@ -151,7 +152,7 @@ def write_pic(fs, output):
         )
 
 
-def write(task_id, loc_result, do_upload=True):
+def write(task_id, loc_result, do_upload=True, do_screenshot=True):
     fs = gcsfs.GCSFileSystem()
     s = time.time()
     LocalResult().load(loc_result)
@@ -164,8 +165,11 @@ def write(task_id, loc_result, do_upload=True):
         for output in loc_result[category]:
             serializer = get_serializer(output["media_type"])
             ser = serializer.serialize(output["data"])
-            output["id"] = str(uuid.uuid4())
-            filename = output["title"]
+            assert "id" in output
+            # output["id"] = str(uuid.uuid4())
+            # output.get("filename") is what is used here, but
+            # output.get("title") is what's usually used.
+            filename = output.get("filename") or output.get("title")
             if not filename.endswith(f".{serializer.ext}"):
                 filename += f".{serializer.ext}"
             zipfileobj.writestr(filename, ser)
@@ -177,7 +181,7 @@ def write(task_id, loc_result, do_upload=True):
                     "filename": filename,
                 }
             )
-            if do_upload and category == "renderable":
+            if do_upload and do_screenshot and category == "renderable":
                 write_pic(fs, output)
         zipfileobj.close()
         buff.seek(0)
@@ -213,6 +217,7 @@ def read(rem_result, json_serializable=True):
                     "title": rem_output["title"],
                     "media_type": rem_output["media_type"],
                     "data": rem_data,
+                    "filename": rem_output["filename"],
                 }
             )
     f = time.time()
