@@ -30,7 +30,7 @@
       <div id="output" class="card card-body card-inner text-center" style="overflow:auto">
         <h4>{{output.title}}</h4>
         {% if output.media_type == 'bokeh' %}
-        <div style="margin:0 auto;">{{output.id}}
+        <div style="margin:0 auto;">
           <div id="{{output.id}}" data-root-id="" className="bk-root"></div>
         </div>
         {% elif output.media_type == 'table' %}
