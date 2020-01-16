@@ -185,7 +185,7 @@ def write(task_id, loc_result, do_upload=True, do_screenshot=True):
                 write_pic(fs, output)
         zipfileobj.close()
         buff.seek(0)
-        if do_upload:
+        if do_upload and category == "renderable":
             with fs.open(f"{BUCKET}/{ziplocation}", "wb") as f:
                 f.write(buff.read())
     f = time.time()
