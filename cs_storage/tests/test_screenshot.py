@@ -27,3 +27,24 @@ def test_taxbrain_outputs():
         basename = f"{output['title'] or 'template'}.html"
         print(f"screenshotting: {basename}")
         cs_storage.screenshot(output)
+
+
+def test_use_with_dask():
+    try:
+        import dask
+        import dask.distributed
+        from distributed import Client
+    except ImportError:
+        import warnings
+
+        warnings.warn("Dask and/or Distributed are not installed")
+        return
+    with open(f"{CURRENT_DIR}/test-tb-remote.json") as f:
+        remote_outputs = json.loads(f.read())
+    outputs = cs_storage.read(remote_outputs["outputs"])
+
+    c = Client()
+    futures = c.map(cs_storage.screenshot, outputs["renderable"])
+    results = c.gather(futures)
+    for result in results:
+        assert isinstance(result, bytes)

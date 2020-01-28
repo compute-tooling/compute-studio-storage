@@ -67,7 +67,12 @@ async def _screenshot(template_path, pic_path):
     puppeteer should be used for creating these screenshots. The
     downside of using puppeteer is that it is written in nodejs.
     """
-    browser = await launch(args=["--no-sandbox"])
+    browser = await launch(
+        handleSIGINT=False,
+        handleSIGTERM=False,
+        handleSIGHUP=False,
+        args=["--no-sandbox"],
+    )
     page = await browser.newPage()
     await page.goto(f"file://{template_path}")
     await page.setViewport(dict(width=1920, height=1080))
