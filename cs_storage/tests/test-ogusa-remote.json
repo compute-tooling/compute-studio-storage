@@ -1,0 +1,33 @@
+{
+    "outputs": {
+        "renderable": {
+            "outputs": [
+                {
+                    "id": "2ba84d72-4a70-429b-8167-00d050658615",
+                    "title": "Percentage Changes in Consumption by Lifetime Income Percentile Group",
+                    "filename": "Percentage Changes in Consumption by Lifetime Income Percentile Group.png",
+                    "media_type": "PNG"
+                },
+                {
+                    "id": "9513e496-357d-4ee8-b6ad-a98d0e37e118",
+                    "title": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy",
+                    "filename": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy.html",
+                    "media_type": "table"
+                }
+            ],
+            "ziplocation": "91d6b58b-a2f6-4faf-92e9-b51f2cd08525_renderable.zip"
+        },
+        "downloadable": {
+            "outputs": [
+                {
+                    "id": "033c82f4-f8b7-4d5a-8313-4f9516fb672d",
+                    "title": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy",
+                    "filename": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy.csv",
+                    "media_type": "CSV"
+                }
+            ],
+            "ziplocation": "91d6b58b-a2f6-4faf-92e9-b51f2cd08525_downloadable.zip"
+        }
+    },
+    "version": "v1"
+}

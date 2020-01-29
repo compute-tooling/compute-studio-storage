@@ -39,7 +39,7 @@ def test_use_with_dask():
 
         warnings.warn("Dask and/or Distributed are not installed")
         return
-    with open(f"{CURRENT_DIR}/test-tb-remote.json") as f:
+    with open(f"{CURRENT_DIR}/test-ogusa-remote.json") as f:
         remote_outputs = json.loads(f.read())
     outputs = cs_storage.read(remote_outputs["outputs"])
 

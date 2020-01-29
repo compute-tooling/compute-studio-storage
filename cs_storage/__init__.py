@@ -178,7 +178,14 @@ def write(task_id, loc_result, do_upload=True):
                 }
             )
             if do_upload and category == "renderable":
-                write_pic(fs, output)
+                # This data will be rendered on an HTML template and needs
+                # to be deserialized from bytes to text.
+                write_pic(
+                    fs,
+                    dict(
+                        output, data=serializer.deserialize(ser, json_serializable=True)
+                    ),
+                )
         zipfileobj.close()
         buff.seek(0)
         if do_upload:
