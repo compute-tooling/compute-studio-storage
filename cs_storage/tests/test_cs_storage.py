@@ -51,6 +51,31 @@ def jpg():
     return initial_buff.read()
 
 
+@pytest.fixture
+def bokeh_plot():
+    try:
+        from bokeh.plotting import figure
+        from bokeh.embed import json_item
+    except ImportError:
+        import warnings
+
+        warnings.warn("Bokeh is not installed.")
+    # see: https://bokeh.pydata.org/en/latest/docs/user_guide/quickstart.html#getting-started
+
+    # prepare some data
+    x = [1, 2, 3, 4, 5]
+    y = [6, 7, 2, 4, 5]
+
+    # create a new plot with a title and axis labels
+    p = figure(title="simple line example", x_axis_label="x", y_axis_label="y")
+
+    # add a line renderer with legend and line thickness
+    p.line(x, y, legend="Temp.", line_width=2)
+
+    # get the results
+    return json_item(p)
+
+
 def test_JSONSerializer():
     ser = cs_storage.JSONSerializer("json")
 
@@ -108,15 +133,11 @@ def test_get_serializer():
         assert cs_storage.get_serializer(t)
 
 
-def test_cs_storage(png, jpg):
+def test_cs_storage(png, jpg, bokeh_plot):
     dummy_uuid = "c7a65ad2-0c2c-45d7-b0f7-d9fd524c49b3"
     exp_loc_res = {
         "renderable": [
-            {
-                "media_type": "bokeh",
-                "title": "bokeh plot",
-                "data": {"html": "<div/>", "javascript": "console.log('hello world')"},
-            },
+            {"media_type": "bokeh", "title": "bokeh plot", "data": bokeh_plot,},
             {"media_type": "table", "title": "table stuff", "data": "<table/>"},
             {"media_type": "PNG", "title": "PNG data", "data": png},
             {"media_type": "JPEG", "title": "JPEG data", "data": jpg},
