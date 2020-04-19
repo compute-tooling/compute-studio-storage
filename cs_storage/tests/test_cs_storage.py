@@ -133,9 +133,9 @@ def test_get_serializer():
         assert cs_storage.get_serializer(t)
 
 
-def test_cs_storage(png, jpg, bokeh_plot):
-    dummy_uuid = "c7a65ad2-0c2c-45d7-b0f7-d9fd524c49b3"
-    exp_loc_res = {
+@pytest.fixture
+def exp_loc_res(png, jpg, bokeh_plot):
+    return {
         "renderable": [
             {"media_type": "bokeh", "title": "bokeh plot", "data": bokeh_plot,},
             {"media_type": "table", "title": "table stuff", "data": "<table/>"},
@@ -160,6 +160,10 @@ def test_cs_storage(png, jpg, bokeh_plot):
             {"media_type": "Text", "title": "Text file", "data": "text data"},
         ],
     }
+
+
+def test_cs_storage(exp_loc_res):
+    dummy_uuid = "c7a65ad2-0c2c-45d7-b0f7-d9fd524c49b3"
     task_id = "1868c4a7-b03c-4fe4-ab45-0aa95c0bfa53"
     rem_res = cs_storage.write(task_id, exp_loc_res)
     loc_res = cs_storage.read(rem_res, json_serializable=False)
@@ -192,6 +196,15 @@ def test_cs_storage(png, jpg, bokeh_plot):
     assert json.dumps(
         cs_storage.read({"renderable": rem_res["renderable"]}, json_serializable=True)
     )
+
+
+def test_cs_storage_serialization(exp_loc_res):
+    dummy_uuid = "c7a65ad2-0c2c-45d7-b0f7-d9fd524c49b3"
+    task_id = "1868c4a7-b03c-4fe4-ab45-0aa95c0bfa53"
+    as_string = cs_storage.serialize_to_json(exp_loc_res)
+    assert json.dumps(as_string)
+    as_bytes = cs_storage.deserialize_from_json(as_string)
+    assert as_bytes == exp_loc_res
 
 
 def test_add_screenshot_links():
