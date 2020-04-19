@@ -1,4 +1,5 @@
 import base64
+import copy
 import io
 import json
 import os
@@ -56,6 +57,11 @@ class Base64Serializer(Serializer):
             return base64.b64encode(data).decode("utf-8")
         else:
             return data
+
+    def serialize(self, data):
+        if isinstance(data, str):
+            return self.from_string(data)
+        return data
 
     def from_string(self, data):
         return base64.b64decode(data.encode("utf-8"))
@@ -127,6 +133,28 @@ class LocalResult(Schema):
 
     renderable = fields.Nested(LocalOutput, many=True)
     downloadable = fields.Nested(LocalOutput, many=True)
+
+
+def serialize_to_json(loc_result):
+    LocalResult().load(loc_result)
+    result = copy.deepcopy(loc_result)
+    for category in ["renderable", "downloadable"]:
+        for output in result[category]:
+            serializer = get_serializer(output["media_type"])
+            as_bytes = serializer.serialize(output["data"])
+            output["data"] = serializer.deserialize(as_bytes, json_serializable=True)
+    return result
+
+
+def deserialize_from_json(json_result):
+    LocalResult().load(json_result)
+    result = copy.deepcopy(json_result)
+    for category in ["renderable", "downloadable"]:
+        for output in result[category]:
+            serializer = get_serializer(output["media_type"])
+            as_bytes = serializer.serialize(output["data"])
+            output["data"] = serializer.deserialize(as_bytes, json_serializable=False)
+    return result
 
 
 def write_pic(fs, output):
