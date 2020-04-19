@@ -18,15 +18,15 @@ def test_taxcruncher_outputs():
         cs_storage.screenshot(output)
 
 
-def test_taxbrain_outputs():
-    with open(f"{CURRENT_DIR}/test-tb-remote.json") as f:
-        remote_outputs = json.loads(f.read())
-    outputs = cs_storage.read(remote_outputs["outputs"])
+# def test_taxbrain_outputs():
+#     with open(f"{CURRENT_DIR}/test-tb-remote.json") as f:
+#         remote_outputs = json.loads(f.read())
+#     outputs = cs_storage.read(remote_outputs["outputs"])
 
-    for output in outputs["renderable"]:
-        basename = f"{output['title'] or 'template'}.html"
-        print(f"screenshotting: {basename}")
-        cs_storage.screenshot(output)
+#     for output in outputs["renderable"]:
+#         basename = f"{output['title'] or 'template'}.html"
+#         print(f"screenshotting: {basename}")
+#         cs_storage.screenshot(output)
 
 
 def test_use_with_dask():
