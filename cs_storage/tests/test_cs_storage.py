@@ -199,8 +199,6 @@ def test_cs_storage(exp_loc_res):
 
 
 def test_cs_storage_serialization(exp_loc_res):
-    dummy_uuid = "c7a65ad2-0c2c-45d7-b0f7-d9fd524c49b3"
-    task_id = "1868c4a7-b03c-4fe4-ab45-0aa95c0bfa53"
     as_string = cs_storage.serialize_to_json(exp_loc_res)
     assert json.dumps(as_string)
     as_bytes = cs_storage.deserialize_from_json(as_string)
