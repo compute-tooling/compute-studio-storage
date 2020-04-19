@@ -7,19 +7,13 @@ try:
     # without the screenshot component.
     from jinja2 import Template
     from pyppeteer import launch
-    from bokeh.resources import CDN
 
-    BASE_ARGS = {
-        "bokeh_scripts": {"cdn_js": CDN.js_files[0], "widget_js": CDN.js_files[1]}
-    }
     SCREENSHOT_ENABLED = True
 
 except ImportError:
     SCREENSHOT_ENABLED = False
     Template = None
     launch = None
-    CDN = None
-    BASE_ARGS = {}
 
 import cs_storage
 
@@ -46,7 +40,7 @@ TEMPLATE = get_template()
 
 
 def write_template(output):
-    kwargs = {**BASE_ARGS, **{"output": output}}
+    kwargs = {"output": output}
     return TEMPLATE.render(**kwargs)
 
 
