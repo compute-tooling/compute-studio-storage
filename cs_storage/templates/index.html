@@ -18,10 +18,12 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-  <script type="text/javascript" src={{bokeh_scripts.cdn_js|safe}}></script>
-  <script type="text/javascript" src={{bokeh_scripts.widget_js|safe}}></script>
-
+  {% if output.media_type == 'bokeh' %}
+  <script type="text/javascript"
+    src="https://cdn.pydata.org/bokeh/release/bokeh-{{output.data.doc.version}}.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-{{output.data.doc.version}}.min.js"></script>
+  {% endif %}
   <script>
     window.MathJax = {
       tex: {

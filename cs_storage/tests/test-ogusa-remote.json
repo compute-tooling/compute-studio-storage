@@ -1,33 +1,33 @@
 {
-    "outputs": {
-        "renderable": {
-            "outputs": [
-                {
-                    "id": "2ba84d72-4a70-429b-8167-00d050658615",
-                    "title": "Percentage Changes in Consumption by Lifetime Income Percentile Group",
-                    "filename": "Percentage Changes in Consumption by Lifetime Income Percentile Group.png",
-                    "media_type": "PNG"
-                },
-                {
-                    "id": "9513e496-357d-4ee8-b6ad-a98d0e37e118",
-                    "title": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy",
-                    "filename": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy.html",
-                    "media_type": "table"
-                }
-            ],
-            "ziplocation": "91d6b58b-a2f6-4faf-92e9-b51f2cd08525_renderable.zip"
+  "outputs": {
+    "renderable": {
+      "outputs": [
+        {
+          "id": "9c9bac3a-8540-4f25-bea9-0b824b97f286",
+          "title": "Percentage Changes in Consumption by Lifetime Income Percentile Group",
+          "filename": "Percentage Changes in Consumption by Lifetime Income Percentile Group.png",
+          "media_type": "PNG"
         },
-        "downloadable": {
-            "outputs": [
-                {
-                    "id": "033c82f4-f8b7-4d5a-8313-4f9516fb672d",
-                    "title": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy",
-                    "filename": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy.csv",
-                    "media_type": "CSV"
-                }
-            ],
-            "ziplocation": "91d6b58b-a2f6-4faf-92e9-b51f2cd08525_downloadable.zip"
+        {
+          "id": "7db41835-3689-4975-a203-7fc6d736d450",
+          "title": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy",
+          "filename": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy.html",
+          "media_type": "table"
         }
+      ],
+      "ziplocation": "563c5492-043d-44e1-8f30-4474cb6237c7_renderable.zip"
     },
-    "version": "v1"
+    "downloadable": {
+      "outputs": [
+        {
+          "id": "8b358a93-7973-47a1-9415-b4c5b15caa49",
+          "title": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy",
+          "filename": "Percentage Changes in Economic Aggregates Between Baseline and Reform Policy.csv",
+          "media_type": "CSV"
+        }
+      ],
+      "ziplocation": "563c5492-043d-44e1-8f30-4474cb6237c7_downloadable.zip"
+    }
+  },
+  "version": "v1"
 }

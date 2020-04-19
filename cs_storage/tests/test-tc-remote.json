@@ -1,57 +1,57 @@
 {
-    "outputs": {
-        "renderable": {
-            "outputs": [
-                {
-                    "id": "0469459a-82ab-4018-be30-3862a5383d4e",
-                    "title": "Basic Liabilities",
-                    "filename": "Basic Liabilities.html",
-                    "media_type": "table"
-                },
-                {
-                    "id": "17162a2f-8951-4c8e-9795-44284e520f72",
-                    "title": "Tax Liabilities by Wage (Holding Other Inputs Constant)",
-                    "filename": "Tax Liabilities by Wage (Holding Other Inputs Constant).json",
-                    "media_type": "bokeh"
-                },
-                {
-                    "id": "43b8914c-6832-4308-b4fa-6a13f899f239",
-                    "title": "Tax Rates by Wage (Holding Other Inputs Constant)",
-                    "filename": "Tax Rates by Wage (Holding Other Inputs Constant).json",
-                    "media_type": "bokeh"
-                },
-                {
-                    "id": "51dccf29-f9b0-42a8-8c76-17ef6544ba47",
-                    "title": "Tax Credits by Wage (Holding Other Inputs Constant)",
-                    "filename": "Tax Credits by Wage (Holding Other Inputs Constant).json",
-                    "media_type": "bokeh"
-                },
-                {
-                    "id": "435e4de6-23b4-4693-8a3a-2b7917190f09",
-                    "title": "Calculation of Liabilities",
-                    "filename": "Calculation of Liabilities.html",
-                    "media_type": "table"
-                }
-            ],
-            "ziplocation": "0fe89f27-37f3-4342-95a6-ffa952e3d4c6_renderable.zip"
+  "outputs": {
+    "renderable": {
+      "outputs": [
+        {
+          "id": "0c744e61-0235-4f91-9d02-bbc801aeeff0",
+          "title": "Basic Liabilities",
+          "filename": "Basic Liabilities.html",
+          "media_type": "table"
         },
-        "downloadable": {
-            "outputs": [
-                {
-                    "id": "8d34d210-f275-495b-839e-18acc1fc6d2a",
-                    "title": "basic_table",
-                    "filename": "basic_table.csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "e1b80703-2088-4938-afa4-c3b49bb3142a",
-                    "title": "calculation_table",
-                    "filename": "calculation_table.csv",
-                    "media_type": "CSV"
-                }
-            ],
-            "ziplocation": "0fe89f27-37f3-4342-95a6-ffa952e3d4c6_downloadable.zip"
+        {
+          "id": "d02d657c-6afc-4f31-96bc-9428b755190e",
+          "title": "Tax Liabilities by Taxpayer Earnings (Holding Other Inputs Constant)",
+          "filename": "Tax Liabilities by Taxpayer Earnings (Holding Other Inputs Constant).json",
+          "media_type": "bokeh"
+        },
+        {
+          "id": "35bb66ac-287a-4de4-930b-6c28c66297bd",
+          "title": "Tax Rates by Taxpayer Earnings (Holding Other Inputs Constant)",
+          "filename": "Tax Rates by Taxpayer Earnings (Holding Other Inputs Constant).json",
+          "media_type": "bokeh"
+        },
+        {
+          "id": "10cc4dc8-12b5-4a6d-b45c-2313b8786555",
+          "title": "Tax Credits by Taxpayer Earnings (Holding Other Inputs Constant)",
+          "filename": "Tax Credits by Taxpayer Earnings (Holding Other Inputs Constant).json",
+          "media_type": "bokeh"
+        },
+        {
+          "id": "b231153f-6b4e-4eaf-8e19-b641dde1cd2e",
+          "title": "Calculation of Liabilities",
+          "filename": "Calculation of Liabilities.html",
+          "media_type": "table"
         }
+      ],
+      "ziplocation": "aabf5cef-024c-4d32-b06e-1b2e4355e703_renderable.zip"
     },
-    "version": "v1"
+    "downloadable": {
+      "outputs": [
+        {
+          "id": "16954424-a13c-4e88-b96e-1e4426fdf719",
+          "title": "basic_table",
+          "filename": "basic_table.csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "73384828-5deb-4c52-886d-949421d8cb3b",
+          "title": "calculation_table",
+          "filename": "calculation_table.csv",
+          "media_type": "CSV"
+        }
+      ],
+      "ziplocation": "aabf5cef-024c-4d32-b06e-1b2e4355e703_downloadable.zip"
+    }
+  },
+  "version": "v1"
 }

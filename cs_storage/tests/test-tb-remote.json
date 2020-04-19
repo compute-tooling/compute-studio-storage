@@ -1,111 +1,711 @@
 {
-    "outputs": {
-        "renderable": {
-            "outputs": [
-                {
-                    "id": "ce297163-20cc-44a3-b565-9fa57bcef8ae",
-                    "title": "",
-                    "filename": ".json",
-                    "media_type": "bokeh"
-                },
-                {
-                    "id": "66c7e9df-62f5-4199-a137-168bd32d245a",
-                    "title": "Aggregate Results",
-                    "filename": "Aggregate Results.json",
-                    "media_type": "bokeh"
-                },
-                {
-                    "id": "5788882a-8c5f-4a90-bb40-1b1b24d72667",
-                    "title": "Tables",
-                    "filename": "Tables.json",
-                    "media_type": "bokeh"
-                }
-            ],
-            "ziplocation": "0cde3e26-94ea-4483-814a-3aa397d9d5e6_renderable.zip"
+  "outputs": {
+    "renderable": {
+      "outputs": [
+        {
+          "id": "c665b57f-97de-465d-a9e6-365d6bf9d46c",
+          "title": "",
+          "filename": ".json",
+          "media_type": "bokeh"
         },
-        "downloadable": {
-            "outputs": [
-                {
-                    "id": "60d0f4b0-d687-4a1a-8ac3-d4cf44ec6158",
-                    "title": "Total Liabilities Change by Calendar Year (Billions).csv",
-                    "filename": "Total Liabilities Change by Calendar Year (Billions).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "92b7cb97-5086-4074-bab8-6936a24154ec",
-                    "title": "Total Liabilities Baseline by Calendar Year (Billions).csv",
-                    "filename": "Total Liabilities Baseline by Calendar Year (Billions).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "9549c414-92bb-463a-83cd-0f20f94cd98c",
-                    "title": "Total Liabilities Reform by Calendar Year (Billions).csv",
-                    "filename": "Total Liabilities Reform by Calendar Year (Billions).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "81cb43e9-b906-466f-83c6-7321a7372d8e",
-                    "title": "Base plan tax vars, weighted total by expanded income bin (2019).csv",
-                    "filename": "Base plan tax vars, weighted total by expanded income bin (2019).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "2a3387d8-3837-419f-bf9f-210e4883f7ea",
-                    "title": "User plan tax vars, weighted total by expanded income bin (2019).csv",
-                    "filename": "User plan tax vars, weighted total by expanded income bin (2019).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "b40043b0-79e6-4654-9ca9-ea3235421930",
-                    "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2019).csv",
-                    "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2019).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "b8c3cafa-5e23-4cc1-b41a-11740718a14c",
-                    "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2019).csv",
-                    "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2019).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "cec78b20-4137-4b71-8ada-f415791e88ae",
-                    "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2019).csv",
-                    "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2019).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "47517e7d-e033-474b-9b69-97b6c19825fc",
-                    "title": "Base plan tax vars, weighted total by expanded income decile (2019).csv",
-                    "filename": "Base plan tax vars, weighted total by expanded income decile (2019).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "49122b30-0baf-4347-bfd1-77d4a1606dae",
-                    "title": "User plan tax vars, weighted total by expanded income decile (2019).csv",
-                    "filename": "User plan tax vars, weighted total by expanded income decile (2019).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "e2bd81b6-dccc-4df9-b0fe-ab4bbf1297f8",
-                    "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2019).csv",
-                    "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2019).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "047baaff-f2a8-4b8f-b0de-be42ddbe9249",
-                    "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2019).csv",
-                    "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2019).csv",
-                    "media_type": "CSV"
-                },
-                {
-                    "id": "9f863037-390b-46c8-8971-ea22afcee630",
-                    "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2019).csv",
-                    "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2019).csv",
-                    "media_type": "CSV"
-                }
-            ],
-            "ziplocation": "0cde3e26-94ea-4483-814a-3aa397d9d5e6_downloadable.zip"
+        {
+          "id": "368fe883-bf0b-4665-af17-e69458932763",
+          "title": "Aggregate Results",
+          "filename": "Aggregate Results.json",
+          "media_type": "bokeh"
+        },
+        {
+          "id": "33547cb0-4e28-4a91-bd8b-5278a374c24f",
+          "title": "Tables",
+          "filename": "Tables.json",
+          "media_type": "bokeh"
         }
+      ],
+      "ziplocation": "895e93b0-aef8-400b-bda4-8863852b1fd5_renderable.zip"
     },
-    "version": "v1"
+    "downloadable": {
+      "outputs": [
+        {
+          "id": "50d02e7b-9c69-4567-bc15-38364cb2a5e1",
+          "title": "Total Liabilities Change by Calendar Year (Billions).csv",
+          "filename": "Total Liabilities Change by Calendar Year (Billions).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "62cff803-5472-4e4b-a0b3-928694fcfb25",
+          "title": "Total Liabilities Baseline by Calendar Year (Billions).csv",
+          "filename": "Total Liabilities Baseline by Calendar Year (Billions).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "36277e5c-90a3-4886-876c-d3411a04a163",
+          "title": "Total Liabilities Reform by Calendar Year (Billions).csv",
+          "filename": "Total Liabilities Reform by Calendar Year (Billions).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "e93b7ff1-c64f-44c9-a32c-b76ca0779a3e",
+          "title": "Base plan tax vars, weighted total by expanded income bin (2019).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income bin (2019).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "49e17eec-32e3-4d0d-9e19-79253d2d6afb",
+          "title": "Base plan tax vars, weighted total by expanded income bin (2020).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income bin (2020).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "35d73c2a-25de-4e0b-9349-60fb15009347",
+          "title": "Base plan tax vars, weighted total by expanded income bin (2021).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income bin (2021).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "110c157d-7545-42dc-9c58-3f9c9903945d",
+          "title": "Base plan tax vars, weighted total by expanded income bin (2022).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income bin (2022).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "04b286dc-7dc4-4a43-af46-f65f51ccbc22",
+          "title": "Base plan tax vars, weighted total by expanded income bin (2023).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income bin (2023).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "c10b1333-a325-4788-adde-7380b7c875f2",
+          "title": "Base plan tax vars, weighted total by expanded income bin (2024).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income bin (2024).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "e9b0b567-edc0-4aeb-a73b-d026b5b8262d",
+          "title": "Base plan tax vars, weighted total by expanded income bin (2025).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income bin (2025).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "6ac07cd7-4aa4-4984-9b51-dd2d934683e9",
+          "title": "Base plan tax vars, weighted total by expanded income bin (2026).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income bin (2026).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "e0571912-e0f5-40fd-8162-04214a7b12f9",
+          "title": "Base plan tax vars, weighted total by expanded income bin (2027).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income bin (2027).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "ed1fb32a-f5f3-4f6f-a501-c68d4a0ee654",
+          "title": "Base plan tax vars, weighted total by expanded income bin (2028).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income bin (2028).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "acc3c7d0-1efa-47bc-ae36-50aceb8fc335",
+          "title": "Base plan tax vars, weighted total by expanded income bin (2029).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income bin (2029).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "4969a7aa-805f-4aa2-8bd9-477a5f74c938",
+          "title": "User plan tax vars, weighted total by expanded income bin (2019).csv",
+          "filename": "User plan tax vars, weighted total by expanded income bin (2019).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "79d92c4c-4cf5-4c64-9990-b41e7ebb446c",
+          "title": "User plan tax vars, weighted total by expanded income bin (2020).csv",
+          "filename": "User plan tax vars, weighted total by expanded income bin (2020).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "744ea2f1-dd8b-45a1-98d0-3fd0caed0364",
+          "title": "User plan tax vars, weighted total by expanded income bin (2021).csv",
+          "filename": "User plan tax vars, weighted total by expanded income bin (2021).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "b09482b1-523c-4d60-b693-e2e05ef91362",
+          "title": "User plan tax vars, weighted total by expanded income bin (2022).csv",
+          "filename": "User plan tax vars, weighted total by expanded income bin (2022).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "53732e25-f453-4aa9-b15f-5b0f9787af62",
+          "title": "User plan tax vars, weighted total by expanded income bin (2023).csv",
+          "filename": "User plan tax vars, weighted total by expanded income bin (2023).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "ff667c5f-2018-41bb-8e8b-33d7c54cd98a",
+          "title": "User plan tax vars, weighted total by expanded income bin (2024).csv",
+          "filename": "User plan tax vars, weighted total by expanded income bin (2024).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "8bb6aed0-77c2-41ab-9845-42b91e7c1566",
+          "title": "User plan tax vars, weighted total by expanded income bin (2025).csv",
+          "filename": "User plan tax vars, weighted total by expanded income bin (2025).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "7cbf72de-ed42-460a-a84a-db91519f8b1a",
+          "title": "User plan tax vars, weighted total by expanded income bin (2026).csv",
+          "filename": "User plan tax vars, weighted total by expanded income bin (2026).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "5528f392-001f-4dfa-a0d5-da50916d3560",
+          "title": "User plan tax vars, weighted total by expanded income bin (2027).csv",
+          "filename": "User plan tax vars, weighted total by expanded income bin (2027).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "925f409b-468b-4b68-986b-25f0404633b2",
+          "title": "User plan tax vars, weighted total by expanded income bin (2028).csv",
+          "filename": "User plan tax vars, weighted total by expanded income bin (2028).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "f459944b-9ca3-45a7-9a66-c8a70b987ce8",
+          "title": "User plan tax vars, weighted total by expanded income bin (2029).csv",
+          "filename": "User plan tax vars, weighted total by expanded income bin (2029).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "45e85d82-f8e5-489e-b038-eeb723de4f94",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2019).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2019).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "56f0a752-d105-4061-9cc7-06d36d2d957e",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2020).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2020).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "56061f39-3d9c-4d22-af92-2a50318fde5c",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2021).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2021).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "f67b9ab9-12c1-4501-8115-a85208defb14",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2022).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2022).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "858764e2-afb4-467a-85b7-ee5e98d286e1",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2023).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2023).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "f38c0192-cbb5-474e-b992-4f9ff25c0e84",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2024).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2024).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "e66e0671-5ce0-4e43-a593-40069018b139",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2025).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2025).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "228a36b3-af86-4f99-badb-b4f6dd57da9d",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2026).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2026).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "1cfcb944-6d8d-4d2f-9fa0-8e2e9a6940fc",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2027).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2027).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "f5ac7d3b-36e0-49ca-a191-614700ce4b95",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2028).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2028).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "fb59016e-8e4c-4a6d-8b5f-a6d3d195e0cf",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2029).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income bin (2029).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "0de8040a-f1c1-4ba4-b4fd-5de92ae3c683",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2019).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2019).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "b9d275a2-5ea7-49c8-8820-9540fc50757e",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2020).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2020).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "d706f078-837e-464d-ad73-b2ba5247bd85",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2021).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2021).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "9373ceb4-f650-40e8-864e-a325efc14cf3",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2022).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2022).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "244424f4-825f-4f87-ac13-5b1591f3ccb8",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2023).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2023).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "e0b2db00-3d14-4a48-a000-f09927a422ca",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2024).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2024).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "4e7a8319-23da-4f03-8dd7-23d33923ba21",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2025).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2025).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "ffc5c8d4-6ceb-4ba1-a112-1f9b516662e1",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2026).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2026).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "52b8ca47-f549-44df-aa55-3330ea090b14",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2027).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2027).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "541f4a4e-0de2-4111-86ad-d62fa1eb848d",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2028).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2028).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "1db7498f-869c-4f6b-b3ea-2182e5ff5b12",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income bin (2029).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income bin (2029).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "487873f9-23a6-4202-abce-95bce0d30e86",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2019).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2019).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "e7150ad8-9a23-4558-9332-e5a00b6ff683",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2020).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2020).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "21b0d7f0-eb09-44ed-bb4a-8432b658efdf",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2021).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2021).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "cf550738-67de-4fe1-bfec-5539d38c8deb",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2022).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2022).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "3e04a9a1-6f6d-4473-a9d2-84374555252e",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2023).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2023).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "d185984b-3c7e-4370-adc0-283892f68ad8",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2024).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2024).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "e49e2539-42a2-45dd-9d6f-7a507958f53c",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2025).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2025).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "349df812-9dbf-40cc-aedf-786e6a73bb9f",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2026).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2026).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "9d9f465b-f563-4fca-aff4-49ed24c6baef",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2027).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2027).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "7a478bdb-b016-4aeb-a2f4-0b2a7450a8fe",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2028).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2028).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "ea5f9790-ba7d-4921-81b8-f611bbae600d",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2029).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income bin (2029).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "d152ab6a-9e7e-4f56-b64d-b63a361e0acd",
+          "title": "Base plan tax vars, weighted total by expanded income decile (2019).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income decile (2019).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "7a508049-ce66-4fd8-80a1-f7d208599104",
+          "title": "Base plan tax vars, weighted total by expanded income decile (2020).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income decile (2020).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "45af7649-0893-479c-98b1-8bfba0c40f9a",
+          "title": "Base plan tax vars, weighted total by expanded income decile (2021).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income decile (2021).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "7dc3a085-eaba-4e8e-b83b-3991df66d96d",
+          "title": "Base plan tax vars, weighted total by expanded income decile (2022).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income decile (2022).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "0838d221-46b2-4c5f-9cd1-3cb3ca0650c4",
+          "title": "Base plan tax vars, weighted total by expanded income decile (2023).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income decile (2023).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "601a8ca2-32c9-4d00-afc4-ee138a584d50",
+          "title": "Base plan tax vars, weighted total by expanded income decile (2024).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income decile (2024).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "731b6700-f0db-409f-8fd2-954d53ac6e14",
+          "title": "Base plan tax vars, weighted total by expanded income decile (2025).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income decile (2025).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "6611885a-03e1-4b56-aa69-9b870fdb00d0",
+          "title": "Base plan tax vars, weighted total by expanded income decile (2026).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income decile (2026).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "8ebd1331-260c-4533-b28f-8f761b5d7eb9",
+          "title": "Base plan tax vars, weighted total by expanded income decile (2027).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income decile (2027).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "2349b305-8358-4acb-8e05-ccc419dc3d10",
+          "title": "Base plan tax vars, weighted total by expanded income decile (2028).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income decile (2028).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "ebf5ce41-c5ae-499f-84ae-d6789ca1475e",
+          "title": "Base plan tax vars, weighted total by expanded income decile (2029).csv",
+          "filename": "Base plan tax vars, weighted total by expanded income decile (2029).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "f3e57a17-8dec-434c-a72e-1d01d80b4f10",
+          "title": "User plan tax vars, weighted total by expanded income decile (2019).csv",
+          "filename": "User plan tax vars, weighted total by expanded income decile (2019).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "6b7f43fe-5cc9-4923-b6c3-bf2dbfbfd201",
+          "title": "User plan tax vars, weighted total by expanded income decile (2020).csv",
+          "filename": "User plan tax vars, weighted total by expanded income decile (2020).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "10a6afe9-8c8d-4cb5-a463-056cd1da6f18",
+          "title": "User plan tax vars, weighted total by expanded income decile (2021).csv",
+          "filename": "User plan tax vars, weighted total by expanded income decile (2021).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "231f5a87-3702-47ea-b28c-e590f148a2f6",
+          "title": "User plan tax vars, weighted total by expanded income decile (2022).csv",
+          "filename": "User plan tax vars, weighted total by expanded income decile (2022).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "af499e60-b37a-447c-a946-8e1f3564c4cb",
+          "title": "User plan tax vars, weighted total by expanded income decile (2023).csv",
+          "filename": "User plan tax vars, weighted total by expanded income decile (2023).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "55e3dc63-838d-40cb-a554-ef161a858bcc",
+          "title": "User plan tax vars, weighted total by expanded income decile (2024).csv",
+          "filename": "User plan tax vars, weighted total by expanded income decile (2024).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "fc5e71c4-b77a-4c0f-ba05-120857ca598d",
+          "title": "User plan tax vars, weighted total by expanded income decile (2025).csv",
+          "filename": "User plan tax vars, weighted total by expanded income decile (2025).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "7efdc238-d0a1-44a6-a21e-eafef96fb29e",
+          "title": "User plan tax vars, weighted total by expanded income decile (2026).csv",
+          "filename": "User plan tax vars, weighted total by expanded income decile (2026).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "1f95fbe4-0770-4280-8279-e264b493bfd3",
+          "title": "User plan tax vars, weighted total by expanded income decile (2027).csv",
+          "filename": "User plan tax vars, weighted total by expanded income decile (2027).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "2c76c9f5-c4d7-4a41-9dd4-845635dc8190",
+          "title": "User plan tax vars, weighted total by expanded income decile (2028).csv",
+          "filename": "User plan tax vars, weighted total by expanded income decile (2028).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "b7ff74cb-e617-492e-bbea-4d790c5da67a",
+          "title": "User plan tax vars, weighted total by expanded income decile (2029).csv",
+          "filename": "User plan tax vars, weighted total by expanded income decile (2029).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "316acca3-2fbc-43c0-9bd9-54d199293f56",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2019).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2019).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "534d6ff3-f78a-4d90-bf62-b6c143488b4d",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2020).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2020).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "3082a7de-6ba3-4ade-93ee-184880c660f3",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2021).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2021).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "cb7d0df4-6b45-4c4a-83f1-62b5aa4d9197",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2022).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2022).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "f3bd00c0-e898-49ef-8469-9e470dfc58db",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2023).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2023).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "d95e25c6-a7e3-4703-90ee-ff53a3d91db0",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2024).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2024).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "39421345-327c-4deb-bf5c-f739449eb23b",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2025).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2025).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "f70d809e-543b-47b3-b9d5-ea6397740438",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2026).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2026).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "ff55f62a-2c4b-4d52-9a61-08081c532b11",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2027).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2027).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "f44d70e0-3ca4-4c89-9804-a35c41396d3a",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2028).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2028).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "2e0a2a38-1c68-492c-be6c-ca82ba87eba2",
+          "title": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2029).csv",
+          "filename": "Individual Income Tax: Difference between Base and User plans by expanded income decile (2029).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "cd906047-bd43-4bbd-8cf9-c48e708896a1",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2019).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2019).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "a3a80223-3ebd-44f4-aca7-f05e94d160a5",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2020).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2020).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "2a444d86-7872-423a-bdd4-39ddf299156e",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2021).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2021).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "e8a46461-bdb7-499d-b780-fcade7c3bbb7",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2022).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2022).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "59efc84b-dd9f-40f8-a107-3ec1902b58db",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2023).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2023).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "768a0a3e-5d1d-42ca-91e7-eca50c3d9e3f",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2024).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2024).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "d8594898-29b3-40b1-92c1-03bfe89f6cf8",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2025).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2025).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "3fa9675d-bb43-4107-a2c7-d97358cb2b71",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2026).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2026).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "00805741-81df-4d5f-9f01-052de3d0be83",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2027).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2027).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "67940105-99df-48cd-b2f1-63332b550220",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2028).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2028).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "c347598e-e1e2-4af3-83e6-a33c79f2281a",
+          "title": "Payroll Tax: Difference between Base and User plans by expanded income decile (2029).csv",
+          "filename": "Payroll Tax: Difference between Base and User plans by expanded income decile (2029).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "750dea23-2472-444c-93ba-5fb09799b4d2",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2019).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2019).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "cf20fb5b-3cba-483a-a5fe-023e8eef3461",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2020).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2020).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "cbc6eaf8-cf4f-4d7a-9a35-3f0d2da878c9",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2021).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2021).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "5068ee8b-def2-496e-92ae-0f60b2f6d2d8",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2022).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2022).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "7369bc09-55bc-482e-9e6b-fd1661a22bb8",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2023).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2023).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "f972c02f-b296-47e9-b0c4-60df34ece0a2",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2024).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2024).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "bc32a2cb-9928-43ce-8403-4bffc02fbef4",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2025).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2025).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "5463953f-0e83-4c89-93b2-23b9fd1c73d4",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2026).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2026).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "1d277356-72b6-472a-b24c-5e17e124773e",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2027).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2027).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "4093e72a-0960-4410-a4c4-4bd53f584b35",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2028).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2028).csv",
+          "media_type": "CSV"
+        },
+        {
+          "id": "96d95ad9-a82f-4432-bc3b-690933d0c6d3",
+          "title": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2029).csv",
+          "filename": "Combined Payroll and Individual Income Tax: Difference between Base and User plans by expanded income decile (2029).csv",
+          "media_type": "CSV"
+        }
+      ],
+      "ziplocation": "895e93b0-aef8-400b-bda4-8863852b1fd5_downloadable.zip"
+    }
+  },
+  "version": "v1"
 }
