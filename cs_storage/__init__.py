@@ -8,7 +8,7 @@ import zipfile
 import time
 from collections import namedtuple
 
-import gcsfs
+import fsspec as fs
 from marshmallow import Schema, fields, validate
 
 
@@ -157,7 +157,7 @@ def deserialize_from_json(json_result):
     return result
 
 
-def write_pic(fs, output):
+def write_pic(fs, output, protocol="gcs"):
     if SCREENSHOT_ENABLED:
         s = time.time()
         try:
@@ -166,7 +166,7 @@ def write_pic(fs, output):
             print("failed to create screenshot for ", output["id"])
             return
         else:
-            with fs.open(f"{BUCKET}/{output['id']}.png", "wb") as f:
+            with fs.open(f"{protocol}://{BUCKET}/{output['id']}.png", "wb") as f:
                 f.write(pic_data)
             f = time.time()
             print(f"Pic write finished in {f-s}s")
@@ -179,8 +179,7 @@ def write_pic(fs, output):
         )
 
 
-def write(task_id, loc_result, do_upload=True):
-    fs = gcsfs.GCSFileSystem()
+def write(task_id, loc_result, do_upload=True, protocol="gcs"):
     s = time.time()
     LocalResult().load(loc_result)
     rem_result = {}
@@ -213,25 +212,30 @@ def write(task_id, loc_result, do_upload=True):
                     dict(
                         output, data=serializer.deserialize(ser, json_serializable=True)
                     ),
+                    protocol=protocol,
                 )
         zipfileobj.close()
         buff.seek(0)
         if do_upload:
-            with fs.open(f"{BUCKET}/{ziplocation}", "wb") as f:
+            with fs.open(f"{protocol}://{BUCKET}/{ziplocation}", "wb") as f:
                 f.write(buff.read())
     f = time.time()
     print(f"Write finished in {f-s}s")
     return rem_result
 
 
-def read(rem_result, json_serializable=True):
+def read(rem_result, json_serializable=True, protocol="gcs"):
     # compute studio results have public read access.
-    fs = gcsfs.GCSFileSystem(token="anon")
+    # fs = gcsfs.GCSFileSystem(token="anon")
     s = time.time()
     RemoteResult().load(rem_result)
     read = {"renderable": [], "downloadable": []}
     for category in rem_result:
-        with fs.open(f"{BUCKET}/{rem_result[category]['ziplocation']}", "rb") as f:
+        with fs.open(
+            f"{protocol}://{BUCKET}/{rem_result[category]['ziplocation']}",
+            "rb",
+            **{protocol: {"token": "anon"}},
+        ) as f:
             res = f.read()
 
         buff = io.BytesIO(res)
