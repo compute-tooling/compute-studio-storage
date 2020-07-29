@@ -15,8 +15,6 @@ except ImportError:
     Template = None
     launch = None
 
-import cs_storage
-
 
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 

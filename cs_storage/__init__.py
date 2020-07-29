@@ -230,8 +230,7 @@ def read(rem_result, json_serializable=True, protocol="gcs"):
     read = {"renderable": [], "downloadable": []}
     for category in rem_result:
         with fs.open(
-            f"{protocol}://{BUCKET}/{rem_result[category]['ziplocation']}",
-            "rb",
+            f"{protocol}://{BUCKET}/{rem_result[category]['ziplocation']}", "rb",
         ) as f:
             res = f.read()
 
@@ -256,9 +255,14 @@ def read(rem_result, json_serializable=True, protocol="gcs"):
     return read
 
 
+def read_screenshot(screenshot_id, protocol="gcs"):
+    if not screenshot_id.endswith(".png"):
+        screenshot_id += ".png"
+    with fs.open(f"{protocol}://{BUCKET}/{screenshot_id}", "rb") as f:
+        return f.read()
+
+
 def add_screenshot_links(rem_result):
     for rem_output in rem_result["renderable"]["outputs"]:
-        rem_output[
-            "screenshot"
-        ] = f"https://storage.googleapis.com/{BUCKET}/{rem_output['id']}.png"
+        rem_output["screenshot"] = f"{rem_output['id']}.png"
     return rem_result
