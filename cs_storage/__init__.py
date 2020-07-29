@@ -225,8 +225,6 @@ def write(task_id, loc_result, do_upload=True, protocol="gcs"):
 
 
 def read(rem_result, json_serializable=True, protocol="gcs"):
-    # compute studio results have public read access.
-    # fs = gcsfs.GCSFileSystem(token="anon")
     s = time.time()
     RemoteResult().load(rem_result)
     read = {"renderable": [], "downloadable": []}
@@ -234,7 +232,6 @@ def read(rem_result, json_serializable=True, protocol="gcs"):
         with fs.open(
             f"{protocol}://{BUCKET}/{rem_result[category]['ziplocation']}",
             "rb",
-            **{protocol: {"token": "anon"}},
         ) as f:
             res = f.read()
 
