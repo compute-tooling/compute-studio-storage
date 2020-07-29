@@ -81,7 +81,7 @@ async def _screenshot(template_path, pic_path):
         width=min(boundingbox["width"], 1920),
         height=min(boundingbox["height"], 1080),
     )
-    await page.screenshot(path=f"{pic_path}", type="png", clip=clip)
+    await page.screenshot(path=f"{pic_path}", type_="png", clip=clip)
     await browser.close()
 
 

@@ -6,9 +6,12 @@ dependencies:
   - pytest
   - gcsfs
   - jinja2 # optional
-  - pyppeteer # optional
   - bokeh # optional
   - websockets # optional
   - matplotlib
   - numpy
   - "pillow<7"
+  - pip
+  - pip:
+      # - pyppeteer2 # optional
+      - git+https://github.com/pyppeteer/pyppeteer@pup2.1.1 # includes pyee bug fix
