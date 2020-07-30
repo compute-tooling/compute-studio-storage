@@ -1,11 +1,8 @@
-import base64
 import io
 import json
-import uuid
-import zipfile
+import os
 
 import pytest
-import requests
 from marshmallow import exceptions
 
 import cs_storage
@@ -208,15 +205,23 @@ def test_cs_storage_serialization(exp_loc_res):
 def test_add_screenshot_links():
     rem_res = {"renderable": {"outputs": [{"id": "1234"}, {"id": "4567"}]}}
 
-    url = f"https://storage.googleapis.com/{cs_storage.BUCKET}/"
     assert cs_storage.add_screenshot_links(rem_res) == {
         "renderable": {
             "outputs": [
-                {"id": "1234", "screenshot": url + "1234.png"},
-                {"id": "4567", "screenshot": url + "4567.png"},
+                {"id": "1234", "screenshot": "1234.png"},
+                {"id": "4567", "screenshot": "4567.png"},
             ]
         }
     }
+
+    current_dir = os.path.abspath(os.path.dirname(__file__))
+    with open(f"{current_dir}/test-tc-remote.json") as f:
+        remote_outputs = json.loads(f.read())["outputs"]
+
+    cs_storage.add_screenshot_links(remote_outputs)
+    for output in remote_outputs["renderable"]["outputs"]:
+        link = output["screenshot"]
+        assert isinstance(cs_storage.read_screenshot(link), bytes)
 
 
 def test_errors():
