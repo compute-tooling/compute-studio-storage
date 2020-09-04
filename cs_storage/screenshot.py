@@ -101,7 +101,12 @@ def screenshot(output, debug=False):
         template_path = temp.name
         with tempfile.NamedTemporaryFile(suffix=".png") as pic:
             pic_path = pic.name
-            asyncio.get_event_loop().run_until_complete(
+            try:
+                loop = asyncio.get_running_loop()
+            except RuntimeError:
+                loop = asyncio.get_event_loop()
+
+            loop.run_until_complete(
                 _screenshot(template_path, pic_path)
             )
             pic_bytes = pic.read()
